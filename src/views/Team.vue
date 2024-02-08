@@ -1,10 +1,10 @@
 <template>
 	<div>
-		<Sidebar />
-	
-		<h1>About</h1>
-		<p>This is the about page</p>
-	
+	<Sidebar />
+	<main id="Team-page">
+		<h1>Team</h1>
+		<p>This is the home page</p>
+	</main>
 </div>
 </template>
 
