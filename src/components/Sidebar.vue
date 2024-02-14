@@ -16,6 +16,10 @@
 				<i class="bi bi-graph-up-arrow material-icons"></i>
 				<span class="text">DASBOARD</span>
 			</router-link>
+			<router-link to="/recepcao" class="button">
+				<i class="bi bi-person-workspace material-icons"></i>
+				<span class="text">RECEPÇÃO</span>
+			</router-link>
 			<router-link to="/paciente" class="button">
 				<i class="bi bi-person-check-fill material-icons"></i>
 				<span class="text">PACIENTE</span>
@@ -61,7 +65,7 @@ aside {
 	background-color: var(--dark);
 	color: var(--light);
 
-	width: calc(2rem + 32px);
+	width: calc(2rem + 22px);
 	overflow: hidden;
 	min-height: 100vh;
 	padding: 1rem;
