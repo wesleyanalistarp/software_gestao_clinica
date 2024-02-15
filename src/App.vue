@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <!-- Content -->
-    <router-view v-if="router" />
+    <router-view />
   </div>
 </template>
 
@@ -14,21 +14,14 @@ export default defineComponent({
   data() {
     return {
       authStore: useAuthStore(),
-	  router: false
     };
   },
   async created() {
-    const token = localStorage.getItem("token");
+    const token = await verifyAuth();
     if (token) {
-      const response = await verifyAuth(token);
-      if (true) {
-        this.authStore.token = token;
-        this.authStore.isAuth = true;
-      }
+      this.authStore.token = token;
+      this.authStore.isAuth = true;
     }
-
-	this.router = true
-	console.log('app')
 
     /* if (!is.authStore.isAuth){
 		this.$router.push("/login");

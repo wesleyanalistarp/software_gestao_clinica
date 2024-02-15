@@ -2,8 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Recepcao from '../views/Recepcao.vue'
-import {useAuthStore} from '../stores/AuthStore';
+import { useAuthStore } from '../stores/AuthStore';
 import Anamnese from '../views/Anamnese.vue'
+import { verifyAuth } from '../config/auth';
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -45,9 +46,19 @@ const router = createRouter({
 	],
 })
 
-router.beforeEach((to, from, next) => {
-	console.log('rotas')
+router.beforeEach(async (to, from, next) => {
+	
+
 	const authStore = useAuthStore();
+
+	if (!authStore.token) {
+		const token = await verifyAuth();
+		if (token) {
+			authStore.token = token;
+			authStore.isAuth = true;
+		}
+	}
+
 	if (to.meta.requiresAuth && !authStore.isAuth) {
 		// Se a rota requer autenticação e o usuário não está autenticado, redirecione para a página de login ou para onde desejar
 		next('/login')

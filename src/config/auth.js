@@ -1,6 +1,10 @@
 import api from './axios'
 
-export const verifyAuth = async (token) => {
+export const verifyAuth = async () => {
+
+    const token = localStorage.getItem('token')
+
+    if (!token) return false;
 
     const config = {
         headers: {
@@ -10,9 +14,9 @@ export const verifyAuth = async (token) => {
     }
 
     try {
-        const response = await api.post('/auth/verify', {}, config)
+        await api.post('/auth/verify', {}, config)
 
-        return true;
+        return token;
     } catch (err) {
 
         return false;
