@@ -142,8 +142,27 @@
 	</div>
 </template>
 
-<script setup>
+<script>
+import { defineComponent } from "vue";
+import api from "../config/axios";
+import { alertInstance } from "../config/alerts";
+import { useAuthStore } from "../stores/AuthStore.js";
 import Sidebar from '../components/Sidebar.vue'
+
+export default defineComponent({
+  name: "Login",
+  components: {
+	Sidebar
+  },
+  data() {
+    return {
+      authStore: useAuthStore()
+    };
+  },
+  mounted() {
+	console.log(this.authStore.token)
+  }
+});
 </script>
 
 <style scope></style>
