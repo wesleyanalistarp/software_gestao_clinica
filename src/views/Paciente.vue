@@ -4,26 +4,26 @@
 		<div class="card text-center">
 			<div class="col mt-1 mb-1">
 				<div class="container-fluid mb-1">
-					<button type="button" class="btn btn-outline-success mt-5 border 1px solid" data-bs-toggle="collapse"
+					<button type="button" class="btn btn-outline-success mt-5 border 1px solid botoes" data-bs-toggle="collapse"
 						data-bs-target="#formulario_atender" role="button" area-expanded="false"
 						aria-controls="formulario_busca" style="height: 70px; width: 110px; margin: 5px; "><i
 							class="bi bi-caret-right-square"></i>
 						Atender</button>
-					<button type="button" class="btn btn-outline-success mt-5 border 1px solid" data-bs-toggle="collapse"
+					<button type="button" class="btn btn-outline-success mt-5 border 1px solid botoes" data-bs-toggle="collapse"
 						data-bs-target="#formulario_buscar" role="button" area-expanded="false"
 						aria-controls="collapseExample" style="height: 70px; width: 110px; margin: 5px; "><i
 							class="bi bi-search"></i>
 						Buscar</button>
-					<button type="button" class="btn btn-outline-success mt-5 border 1px solid"
+					<button type="button" class="btn btn-outline-success mt-5 border 1px solid botoes"
 						style="height: 70px; width: 110px; margin: 5px; "><i class="bi bi-file-earmark-medical"></i>
 						Laudo</button>
-					<button type="button" class="btn btn-outline-success mt-5 border 1px solid"
+					<button type="button" class="btn btn-outline-success mt-5 border 1px solid botoes"
 						style="height: 70px; width: 110px; margin: 5px; "><i class="bi bi-clipboard2-pulse"></i>
 						Exames</button>
-					<button type="button" class="btn btn-outline-success mt-5 border 1px solid"
+					<button type="button" class="btn btn-outline-success mt-5 border 1px solid botoes"
 						style="height: 70px; width: 110px; margin: 5px; "><i class="bi bi-file-text"></i>
 						Receita</button>
-					<button type="button" class="btn btn-outline-success mt-5 border 1px solid"
+					<button type="button" class="btn btn-outline-success mt-5 border 1px solid botoes"
 						style="height: 70px; width: 160px; margin: 5px; "><i class="bi bi-heart-pulse"></i>
 						Procedimento</button>
 				</div>
@@ -120,7 +120,7 @@
 		<!--fim do formulário editar-->
 		<!--inicio do formulário buscar-->
 		<div class="collapse" id="formulario_buscar">
-			<div class="container ">
+			<div class="container-fluid">
 				<div class="card mt-2 p-3">
 					<div class="text-center h4 mt-2 mb-3">Buscar paciente</div>
 					<fieldset class="border rounded-3 h6 p-3 ">
@@ -165,4 +165,10 @@ export default defineComponent({
 });
 </script>
 
-<style scope></style>
+<style scoped>
+ .botoes:hover{
+    background-color: var(--dark);
+    transform: scale(1.1);
+    transition: all 0.5s;
+ }
+</style>

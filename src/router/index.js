@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Recepcao from '../views/Recepcao.vue'
 import {useAuthStore} from '../stores/AuthStore';
+import Anamnese from '../views/Anamnese.vue'
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -31,6 +32,10 @@ const router = createRouter({
 			path: '/recepcao',
 			component: () => import('../views/Recepcao.vue'),
 			meta: { requiresAuth: true }
+		},
+		{
+			path: '/anamnese',
+			component: () => import('../views/Anamnese.vue')
 		},
 		{
 			path: '/login',
