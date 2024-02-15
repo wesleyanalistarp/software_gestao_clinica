@@ -3,48 +3,51 @@
     <div class="container-fluid">
         <div class="card text-center">
             <div class="col mt-1 mb-1">
-                <div class="container-fluid mb-1">
-                    <button type="button" class="btn btn-outline-success mt-5 border 1px solid" data-bs-toggle="collapse"
+                    <button type="button" class="btn btn-outline-success border 1px solid botoes" data-bs-toggle="collapse"
                         data-bs-target="#formulario_cadastro" role="button" area-expanded="false"
-                        aria-controls="collapseExample" style="height: 70px; width: 120px; margin: 5px; "><i
-                            class="bi bi-person-add"></i>
-                        Cadastrar</button>
-                        <button type="button" class="btn btn-outline-success mt-5 border 1px solid" data-bs-toggle="collapse"
+                        aria-controls="collapseExample" style="height: 70px; width: 130px; margin: 5px;">
+                        <i class="bi bi-person-add"></i>
+                        Cadastrar Paciente</button> 
+                    <button type="button" class="btn btn-outline-success  border 1px solid botoes" data-bs-toggle="collapse"
+                        data-bs-target="#formulario_cadastro" role="button" area-expanded="false"
+                        aria-controls="collapseExample" style="height: 70px; width: 130px; margin: 5px; ">
+                        <i class="bi bi-person-add"></i>
+                        Cadastrar Profissional</button> 
+                        <button type="button" class="btn btn-outline-success border 1px solid botoes" data-bs-toggle="collapse"
                         data-bs-target="#formulario_agenda" role="button" area-expanded="false"
                         aria-controls="formulario_busca" style="height: 70px; width: 110px; margin: 5px; ">
                         <i class="bi bi-calendar2-day"></i>
                         Agenda</button>
-                    <button type="button" class="btn btn-outline-success mt-5 border 1px solid" data-bs-toggle="collapse"
+                    <button type="button" class="btn btn-outline-success border 1px solid botoes" data-bs-toggle="collapse"
                         data-bs-target="#formulario_editar" role="button" area-expanded="false"
                         aria-controls="formulario_busca" style="height: 70px; width: 110px; margin: 5px; "><i
                             class="bi bi-pencil-square"></i>
                         Editar</button>
-                    <button type="button" class="btn btn-outline-success mt-5 border 1px solid" data-bs-toggle="collapse"
+                    <button type="button" class="btn btn-outline-success border 1px solid botoes" data-bs-toggle="collapse"
                         data-bs-target="#formulario_ficha" role="button" area-expanded="false"
                         aria-controls="collapseExample" style="height: 70px; width: 110px; margin: 5px; "><i
                             class="bi bi-person-lines-fill"></i>
                         Ficha</button>
-                    <button type="button" class="btn btn-outline-success mt-5 border 1px solid" data-bs-toggle="collapse"
+                    <button type="button" class="btn btn-outline-success border 1px solid botoes" data-bs-toggle="collapse"
                         data-bs-target="#formulario_laudo" role="button" area-expanded="false"
                         aria-controls="collapseExample" style="height: 70px; width: 110px; margin: 5px; "><i 
                         class="bi bi-file-earmark-medical"></i>
                         Laudo</button>
-                    <button type="button" class="btn btn-outline-success mt-5 border 1px solid" data-bs-toggle="collapse"
+                    <button type="button" class="btn btn-outline-success border 1px solid botoes" data-bs-toggle="collapse"
                         data-bs-target="#formulario_exames" role="button" area-expanded="false"
                         aria-controls="collapseExample"
                         style="height: 70px; width: 110px; margin: 5px; "><i class="bi bi-clipboard2-pulse"></i>
                         Exames</button>
-                    <button type="button" class="btn btn-outline-success mt-5 border 1px solid" data-bs-toggle="collapse"
+                    <button type="button" class="btn btn-outline-success border 1px solid botoes" data-bs-toggle="collapse"
                         data-bs-target="#formulario_receita" role="button" area-expanded="false"
                         aria-controls="collapseExample"
                         style="height: 70px; width: 110px; margin: 5px; "><i class="bi bi-file-text"></i>
                         Receita</button>
-                    <button type="button" class="btn btn-outline-success mt-5 border 1px solid" data-bs-toggle="collapse"
+                    <button type="button" class="btn btn-outline-success border 1px solid botoes" data-bs-toggle="collapse"
                         data-bs-target="#formulario_procedimento" role="button" area-expanded="false"
                         aria-controls="collapseExample"
                         style="height: 70px; width: 160px; margin: 5px; "><i class="bi bi-heart-pulse"></i>
                         Procedimento</button>
-                </div>
             </div>
         </div>
         <!--inicio do formulário do paciente-->
@@ -551,3 +554,11 @@ import Sidebar from '../components/Sidebar.vue'
 const alertList = document.querySelectorAll('.alert')
 const alerts = [...alertList].map(element => new bootstrap.Alert(element))
 </script>
+
+<style scoped>
+ .botoes:hover{
+    background-color: var(--dark);
+    transform: scale(1.1);
+    transition: all 0.5s;
+ }
+</style>
