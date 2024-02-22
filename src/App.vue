@@ -50,6 +50,7 @@ export default defineComponent({
 
 body {
   background: var(--light);
+  overflow-y: scroll;
 }
 
 button {
@@ -58,6 +59,27 @@ button {
   border: none;
   outline: none;
   background: none;
+}
+
+/* Personaliza toda a barra de rolagem */
+::-webkit-scrollbar {
+  width: 7px; /* Largura da barra de rolagem */
+}
+
+/* Personaliza o fundo (track) da barra de rolagem */
+::-webkit-scrollbar-track {
+  background: rgba(165, 165, 165, 0.605); /* Cor de fundo */
+}
+
+/* Personaliza o indicador de rolagem (thumb) da barra de rolagem */
+::-webkit-scrollbar-thumb {
+  background: var(--dark-alt); /* Cor do indicador de rolagem */
+  border-radius: 5px;
+}
+
+/* Personaliza o indicador de rolagem ao passar o mouse */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Cor do indicador de rolagem ao passar o mouse */
 }
 
 .app {
