@@ -25,12 +25,8 @@
         <button
           type="button"
           class="btn btn-outline-success border 1px solid botoes"
-          data-bs-toggle="collapse"
-          data-bs-target="#formulario_agenda"
-          role="button"
-          area-expanded="false"
-          aria-controls="formulario_busca"
-          @click="pagina_menu = 3"
+          :class="{'active': tabAtual == 'AgendaComponent' }"
+          @click="tabAtual = 'AgendaComponent'"
           style="height: 70px; width: 110px; margin: 5px"
         >
           <i class="bi bi-calendar2-day"></i>
@@ -585,27 +581,13 @@
       </div>
     </div>
     <!--fim do formulário procedimentos-->
-    <!--inicio do formulário agenda-->
-    <div class="collapse" id="formulario_agenda">
-      <div class="container-fluid">
-        <div class="card mt-2 p-3">
-          <div class="text-center h4 mt-2 mb-3">Agendamento</div>
-          <fieldset class="border rounded-3 h6 p-3">
-            <legend class="float-none w-auto px-3 h6">Agendamento</legend>
-            <nav class="navbar bg-body-tertiary">
-              <div class="container-fluid"></div>
-            </nav>
-          </fieldset>
-        </div>
-      </div>
-    </div>
-    <!--fim do formulário agenda-->
   </div>
 </template>
 <script setup>
 import Sidebar from "../components/Sidebar.vue";
 import CadastrarPacienteComponent from "../components/Recepcao/CadastrarPacienteComponent.vue";
 import CadastrarProfissionalComponent from "../components/Recepcao/CadastrarProfissionalComponent.vue";
+import AgendaComponent from "../components/Recepcao/AgendaComponent.vue";
 import { shallowRef } from "vue";
 
 const tabAtual = shallowRef("CadastrarPacienteComponent");
@@ -613,6 +595,7 @@ const tabAtual = shallowRef("CadastrarPacienteComponent");
 const tabs = {
   CadastrarPacienteComponent,
   CadastrarProfissionalComponent,
+  AgendaComponent
 };
 </script>
 

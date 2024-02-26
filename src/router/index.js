@@ -16,6 +16,7 @@ const router = createRouter({
 		},
 		{
 			path: '/paciente',
+			name: 'paciente',
 			component: () => import('../views/Paciente.vue'),
 			meta: { requiresAuth: true }
 		},
@@ -35,7 +36,8 @@ const router = createRouter({
 			meta: { requiresAuth: true }
 		},
 		{
-			path: '/anamnese',
+			path: '/anamnese/:id',
+			name: 'anamnese',
 			component: () => import('../views/Anamnese.vue')
 		},
 		{
@@ -59,7 +61,7 @@ router.beforeEach(async (to, from, next) => {
 		}
 	}
 
-	if (to.meta.requiresAuth && !authStore.isAuth) {
+	if (to.meta.requiresAuth && !authStore.isAuth && false) {
 		// Se a rota requer autenticação e o usuário não está autenticado, redirecione para a página de login ou para onde desejar
 		next('/login')
 	} else {

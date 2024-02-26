@@ -59,7 +59,7 @@
 									<td>Autista</td>
 									<td>10/02/2024</td>
 									<td>
-										<button type="button" class="btn btn-outline-success btn-sm m-1">Atender</button>
+										<router-link :to="{ name: 'anamnese', params: { id: '1' } }" class="btn btn-outline-success btn-sm m-1">Atender</router-link>
 										<button type="button" class="btn btn-outline-warning btn-sm m-1">Chamar</button>
 										<button type="button" class="btn btn-outline-danger btn-sm m-1">Desistiu</button>
 									</td>
