@@ -3,9 +3,130 @@
     <div>
         <div class="container-fluid">
             <div class="card" width="100%" height="60px">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque fuga rerum ex. Quisquam,
-                    sapiente voluptas assumenda exercitationem quo aut sunt officia quam fugit perspiciatis
-                    praesentium quidem libero nisi corrupti fugiat?</p>
+                <div class="nome">
+                    <table>
+                        <tr>
+                            <td><img src="../assets/teste.webp" width="150px" height="150px"></td>
+                            <td class="identi"> Wesley Ramon de Assis <br>
+                                34 anos
+                                Prontuário:
+                                Nº 12
+
+                                <span class="badge text-bg-primary indicador">Particular</span>
+                                <span class="badge text-bg-warning indicador">Convênio</span><br>
+                                <a href="#"><i class="fa-solid fa-triangle-exclamation icone1" data-bs-toggle="modal"
+                                        data-bs-target="#alergias"></i></a>
+                                <a href="#"><i class="fa-solid fa-binoculars icone2" data-bs-toggle="modal"
+                                        data-bs-target="#historico"></i></a>
+                                <a href="#"><i class="fa-solid fa-hospital-user icone3" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa-solid fa-capsules icone3"></i></a>
+                                <div class="position-absolute top-0 end-0">
+                                    <button type="button" class="btn btn-outline-success m-2">
+                                        <i class="fa-solid fa-play"></i> Iniciar Atendimento
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--inicio do modal dos icones-->
+                <div class="modal fade" id="alergias" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Alergia</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="Subscrible">Puxando informações do banco quando fez o cadastro do paciente já
+                                    cadastrou a alergia</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--*********************************************************-->
+                <div class="modal fade" id="historico" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Histórico</h1>
+                            </div>
+                            <div class="modal-body">
+                                <div class="accordion" id="accordionExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#collapseOne" aria-expanded="true"
+                                                aria-controls="collapseOne">
+                                                Atendimento: 12/02/2024
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse show"
+                                            data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <strong>This is the first item's accordion body.</strong> It is shown by
+                                                default, until the collapse plugin adds the appropriate classes that we use
+                                                to style each element. These classes control the overall appearance, as well
+                                                as the showing and hiding via CSS transitions. You can modify any of this
+                                                with custom CSS or overriding our default variables. It's also worth noting
+                                                that just about any HTML can go within the <code>.accordion-body</code>,
+                                                though the transition does limit overflow.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                aria-expanded="false" aria-controls="collapseTwo">
+                                                Atendimento: 22/01/2024
+                                            </button>
+                                        </h2>
+                                        <div id="collapseTwo" class="accordion-collapse collapse"
+                                            data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <strong>This is the second item's accordion body.</strong> It is hidden by
+                                                default, until the collapse plugin adds the appropriate classes that we use
+                                                to style each element. These classes control the overall appearance, as well
+                                                as the showing and hiding via CSS transitions. You can modify any of this
+                                                with custom CSS or overriding our default variables. It's also worth noting
+                                                that just about any HTML can go within the <code>.accordion-body</code>,
+                                                though the transition does limit overflow.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                                aria-expanded="false" aria-controls="collapseThree">
+                                                Atendimento: 16/01/2023
+                                            </button>
+                                        </h2>
+                                        <div id="collapseThree" class="accordion-collapse collapse"
+                                            data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <strong>This is the third item's accordion body.</strong> It is hidden by
+                                                default, until the collapse plugin adds the appropriate classes that we use
+                                                to style each element. These classes control the overall appearance, as well
+                                                as the showing and hiding via CSS transitions. You can modify any of this
+                                                with custom CSS or overriding our default variables. It's also worth noting
+                                                that just about any HTML can go within the <code>.accordion-body</code>,
+                                                though the transition does limit overflow.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <ul class="nav nav-pills mb-3 mt-3" id="pills-tab" role="tablist">
@@ -128,7 +249,7 @@
                             <div class="row">
                                 <div class="form-floating">
                                     <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                                        style="height: 100px"></textarea>
+                                        style="width: 100"></textarea>
                                     <label for="floatingTextarea2">Queixa principal</label>
                                 </div>
                                 <div class="mb-3 mt-2 col-2">
@@ -162,15 +283,85 @@
                 </div>
             </div>
         </div>
-</div>
+    </div>
 </template>
 
 <script setup>
 import Sidebar from '../components/Sidebar.vue'
 
-
 </script>
 
-<style scoped>.input-number::-webkit-inner-spin-button {
+<style scoped>
+.input-number::-webkit-inner-spin-button {
     -webkit-appearance: none;
+}
+
+.indicador {
+    padding: 5px;
+    margin: 2px;
+}
+
+.icones {
+    margin-left: 155px;
+}
+
+.icone {
+    margin: 8px;
+    color: var(--dark);
+    font-size: 20px;
+}
+
+.icone1 {
+    margin: 8px;
+    color: orange;
+    font-size: 20px;
+}
+
+.icone2 {
+    margin: 8px;
+    color: rgb(0, 183, 255);
+    font-size: 20px;
+}
+
+.icone3 {
+    margin: 8px;
+    color: rgb(0, 183, 255);
+    font-size: 20px;
+}
+
+.icone1:hover {
+    color: rgb(201, 135, 14);
+    transform: scale(1.3);
+    transition: all 0.5s ease-in-out;
+
+}
+
+text {
+    display: none;
+}
+
+text:hover {
+    display: inline;
+}
+
+.icone2:hover {
+    color: rgb(14, 173, 201);
+    transform: scale(1.3);
+    transition: all 0.5s ease-in-out;
+
+}
+
+.icone3:hover {
+    color: rgb(14, 195, 201);
+    transform: scale(1.3);
+    transition: all 0.5s ease-in-out;
+
+}
+
+.icone:hover {
+    color: rgba(7, 132, 235, 0.911);
+}
+
+.identi {
+    font-size: 20px;
 }</style>

@@ -36,7 +36,7 @@ const router = createRouter({
 			meta: { requiresAuth: true }
 		},
 		{
-			path: '/anamnese/:id',
+			path: '/anamnese',
 			name: 'anamnese',
 			component: () => import('../views/Anamnese.vue')
 		},
