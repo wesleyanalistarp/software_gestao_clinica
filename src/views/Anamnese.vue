@@ -14,12 +14,12 @@
 
                                 <span class="badge text-bg-primary indicador">Particular</span>
                                 <span class="badge text-bg-warning indicador">Convênio</span><br>
-                                <a href="#"><i class="fa-solid fa-triangle-exclamation icone1" data-bs-toggle="modal"
-                                        data-bs-target="#alergias"></i></a>
-                                <a href="#"><i class="fa-solid fa-binoculars icone2" data-bs-toggle="modal"
-                                        data-bs-target="#historico"></i></a>
-                                <a href="#"><i class="fa-solid fa-hospital-user icone3" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa-solid fa-capsules icone3"></i></a>
+                                <a href="#"><abbr title="Alergias clique no icone"><i class="fa-solid fa-triangle-exclamation icone1" data-bs-toggle="modal"
+                                        data-bs-target="#alergias"></i></abbr></a>
+                                <a href="#"><abbr title="Histórico do paciente clique no icone "><i class="fa-solid fa-binoculars icone2" data-bs-toggle="modal"
+                                        data-bs-target="#historico"></i></abbr></a>
+                                <a href="#"><abbr title="Exames do paciente clique no icone "><i class="fa-solid fa-hospital-user icone3" aria-hidden="true"></i></abbr></a>
+                                <a href="#"><abbr title="Uso de clique no icone "><i class="fa-solid fa-capsules icone3"></i></abbr></a>
                                 <div class="position-absolute top-0 end-0">
                                     <button type="button" class="btn btn-outline-success m-2">
                                         <i class="fa-solid fa-play"></i> Iniciar Atendimento
@@ -35,7 +35,6 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Alergia</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <p class="Subscrible">Puxando informações do banco quando fez o cadastro do paciente já
@@ -248,8 +247,8 @@
                             <legend class="float-none w-auto px-3 h6 ">Diagnóstico</legend>
                             <div class="row">
                                 <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                                        style="width: 100"></textarea>
+                                    <textarea class="form-control" cols="133" placeholder="Leave a comment here" id="floatingTextarea2"
+                                        ></textarea>
                                     <label for="floatingTextarea2">Queixa principal</label>
                                 </div>
                                 <div class="mb-3 mt-2 col-2">
@@ -271,9 +270,34 @@
                     tabindex="0">
                     <div class="card">
                         <fieldset class="border rounded-3 h6 p-3 ">
-                            <legend class="float-none w-auto px-3 h6 ">Anexar exames</legend>
+                            <legend class="float-none w-auto px-3 h6">Anexar exames</legend>
                             <div class="row">
-
+                                <div class="wrapper">
+                                    <div class="box">
+                                        <div class="input-box">
+                                            <h2 class="upload-area">Carregar Arquivos</h2>
+                                            <form action="">
+                                                <input type="file" id="upload" accept=".doc, .docs, .pdf, .jpeg, .png" hidden>
+                                                <label for="upload" class="uploadlabel">
+                                                    <span><i class="fa-solid fa-cloud-arrow-up"></i></span>
+                                                    <p>Clique para adicionar</p>
+                                                </label>
+                                            </form>
+                                        </div>
+                                        <div id="filewrapper">
+                                            <h3 class="uploader">Documento carregado</h3>
+                                            <div class="showfilebox">
+                                                <div class="left">
+                                                    <!-- <span class="filetype">pdf</span>
+                                                    <h3>Ravi web.pdf</h3> -->
+                                                </div>
+                                                <div class="right">
+                                                    <!-- <span>&#215;</span> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </fieldset>
                     </div>
@@ -288,6 +312,45 @@
 
 <script setup>
 import Sidebar from '../components/Sidebar.vue'
+
+
+window.addEventListener("load", ()=>{
+    const input = document.getElementById("upload");
+    const filewrapper = document.getElementById("filewrapper");
+
+    input.addEventListener("change",(e)=>{
+    let fileName = e.target.files[0].name;
+    let filetype = e.target.value.split(".").pop();
+       fileshow(fileName, filetype);
+    })
+
+    const fileshow=(fileName, filetype)=>{
+        const showfileboxElem = document.createElement("div");
+        showfileboxElem.classList.add("showfilebox");
+        const leftElem = document.createElement("div");
+        leftElem.classList.add("left");
+        const fileTypeElem = document.createElement("span");
+        fileTypeElem.classList.add("filetype");
+        fileTypeElem.innerHTML=filetype;
+        leftElem.append(fileTypeElem);
+        const filetitleElem = document.createElement("h3");
+        filetitleElem.innerHTML=fileName;
+        leftElem.append(filetitleElem);
+        showfileboxElem.append(leftElem);
+        const rightElem = document.createElement("div");
+        rightElem.classList.add("right");
+        showfileboxElem.append(rightElem);
+        const crossElem = document.createElement("span");
+        crossElem.innerHTML="&#215;";
+        rightElem.append(crossElem);
+        filewrapper.append(showfileboxElem);
+
+        crossElem.addEventListener("click",()=>{
+            filewrapper.removechild(showfileboxElem);
+        })
+    }
+
+})
 
 </script>
 
@@ -364,4 +427,107 @@ text:hover {
 
 .identi {
     font-size: 20px;
-}</style>
+}
+
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.upload-area{
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.uploadlabel{
+    width: 100%;
+    min-height: 100px;
+    background: #18a7ff0d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px dashed #18a7ff82;
+    cursor: pointer;
+}
+
+.uploadlabel span{
+    font-size:70px;
+    color: #18a7ff82;
+}
+
+
+.uploadlabel p{
+    color: #18a7ff82;
+    font-size: 20px;
+    font-weight: 800;
+    font-family: cursive;
+}
+
+.uploader{
+    margin: 30px 0;
+    font-size: 16px;
+    font-weight: 700;
+    color:#a5a5a5;
+}
+
+.showfilebox{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 10px 15px;
+    box-shadow: #0000000d 0px 0px 0px 1px, #d1d5db3b, 0px 0px 0px 1px inset;
+
+}
+
+.showfilebox .left{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filetype{
+    background: #18a7ff;
+    color: #fff;
+    padding: 5px 15px;
+    font-size: 20px;
+    text-transform: capitalize;
+    font-weight: 700;
+    border-radius: 3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    -ms-border-radius:3px;
+    -o-border-radius:3px;
+}
+
+.left h3{
+    font-weight: 600;
+    font-size: 18px;
+    color: #292f42;
+    margin: 0;
+}
+
+
+.right span{
+    background: #18a7ff;
+    color:#fff;
+    width: 25px;
+    height: 25px;
+    font-size: 25px;
+    line-height: 25px;
+    display: inline-block;
+    text-align: center;
+    font-weight:700;
+    cursor: pointer;
+    border-radius:50%;
+}
+
+</style>
