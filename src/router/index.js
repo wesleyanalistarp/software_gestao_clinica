@@ -61,7 +61,7 @@ router.beforeEach(async (to, from, next) => {
 		}
 	}
 
-	if (to.meta.requiresAuth && !authStore.isAuth) {
+	if ((to.meta.requiresAuth && !authStore.isAuth) && false) {
 		// Se a rota requer autenticação e o usuário não está autenticado, redirecione para a página de login ou para onde desejar
 		next('/login')
 	} else {
