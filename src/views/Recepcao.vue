@@ -297,6 +297,30 @@
                   <option value="1">Buscar do banco</option>
                 </select>
               </div>
+              <div class="mb-2 mt-2 col-3">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Algum tipo de alergia Alergia ?</label
+                >
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Qual?"
+                />
+              </div>
+              <div class="mb-2 mt-2 col-3">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Toma medicação contínua ?</label
+                >
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Qual?"
+                />
+              </div>
             </div>
           </fieldset>
           <!--decalração do convênio do paciente-->
