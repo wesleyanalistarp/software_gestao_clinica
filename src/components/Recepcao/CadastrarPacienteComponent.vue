@@ -9,7 +9,7 @@
           <fieldset class="border rounded-3 h6 p-3">
             <legend class="float-none w-auto px-3 h6">Informações</legend>
             <div class="row">
-              <div class="mb-2 mt-2 col-4">
+              <div class="mb-2 mt-2 col-md-4 col-12">
                 <label for="nome" class="form-label">Nome</label>
                 <input
                   type="text"
@@ -21,7 +21,7 @@
                 />
               </div>
 
-              <div class="mb-3 mt-2 col-3">
+              <div class="mb-3 mt-2 col-md-3 col-6">
                 <label for="celular" class="form-label">Telefone</label>
                 <input
                   type="text"
@@ -34,7 +34,7 @@
                   required
                 />
               </div>
-              <div class="mb-3 mt-2 col-3">
+              <div class="mb-3 mt-2 col-md-3 col-6">
                 <label for="cpf" class="form-label">CPF</label>
                 <input
                   type="text"
@@ -47,7 +47,7 @@
                   required
                 />
               </div>
-              <div class="mb-3 mt-2 col-2">
+              <div class="mb-3 mt-2 col-md-2 col-6">
                 <label for="data_nascimento" class="form-label"
                   >Data de Nascimento</label
                 >
@@ -59,7 +59,7 @@
                   required
                 />
               </div>
-              <div class="mb-3 mt-2 col-4">
+              <div class="mb-3 mt-2 col-md-4 col-6">
                 <label for="filiacao" class="form-label">Nome da mãe</label>
                 <input
                   type="text"
@@ -70,7 +70,7 @@
                   required
                 />
               </div>
-              <div class="mb-3 mt-2 col-4">
+              <div class="mb-3 mt-2 col-md-4 col-6">
                 <label for="rg" class="form-label">RG</label>
                 <input
                   type="text"
@@ -83,7 +83,7 @@
                   required
                 />
               </div>
-              <div class="mb-3 mt-2 col-4">
+              <div class="mb-3 mt-2 col-md-4 col-6">
                 <label for="sus" class="form-label">CNS</label>
                 <input
                   type="text"
@@ -97,7 +97,7 @@
                 />
               </div>
 
-              <div class="mb-3 mt-2 col-2">
+              <div class="mb-3 mt-2 col-md-2 col-6">
                 <label for="estado_civil" class="form-label">
                   UF Naturalidade
                 </label>
@@ -120,7 +120,7 @@
                 </select>
               </div>
 
-              <div class="mb-3 mt-2 col-5">
+              <div class="mb-3 mt-2 col-md-5 col-6">
                 <label for="estado_civil" class="form-label">
                   Naturalidade
                 </label>
@@ -148,7 +148,7 @@
                 </select>
               </div>
 
-              <div class="mb-3 mt-2 col-5">
+              <div class="mb-3 mt-2 col-md-5 col-6">
                 <label for="estado_civil" class="form-label">
                   Estado Civil
                 </label>
@@ -167,7 +167,7 @@
                   <option value="5">União Estável</option>
                 </select>
               </div>
-              <div class="mb-3 mt-2 col-4">
+              <div class="mb-3 mt-2 col-md-4 col-6">
                 <label for="sexo" class="form-label">Sexo</label>
                 <select
                   class="form-select form-select-sm"
@@ -182,7 +182,7 @@
                   <option value="O">Outros</option>
                 </select>
               </div>
-              <div class="mb-3 mt-2 col-4">
+              <div class="mb-3 mt-2 col-md-4 col-6">
                 <label for="escolaridade" class="form-label">
                   Escolaridade
                 </label>
@@ -228,7 +228,7 @@
             <legend class="float-none w-auto px-3 h6">Endereço</legend>
 
             <div class="row">
-              <div class="mb-3 mt-2 col-3">
+              <div class="mb-3 mt-2 col-md-3 col-6">
                 <label for="cep" class="form-label">CEP</label>
                 <input
                   type="text"
@@ -245,7 +245,7 @@
                   required
                 />
               </div>
-              <div class="mb-3 mt-2 col-3">
+              <div class="mb-3 mt-2 col-md-3 col-6">
                 <label for="uf" class="form-label">UF</label>
                 <input
                   class="form-control form-select-sm"
@@ -255,7 +255,7 @@
                   required
                 />
               </div>
-              <div class="mb-3 mt-2 col-6">
+              <div class="mb-3 mt-2 col-md-6 col-6">
                 <label for="cidade" class="form-label">Cidade</label>
                 <input
                   class="form-control form-select-sm"
@@ -264,7 +264,7 @@
                   required
                 />
               </div>
-              <div class="mb-3 mt-2 col-4">
+              <div class="mb-3 mt-2 col-md-4 col-6">
                 <label for="bairro" class="form-label">Bairro</label>
                 <input
                   type="text"
@@ -275,7 +275,7 @@
                   required
                 />
               </div>
-              <div class="mb-3 mt-2 col-5">
+              <div class="mb-3 mt-2 col-md-5 col-8">
                 <label for="rua" class="form-label">Rua</label>
                 <input
                   type="text"
@@ -286,7 +286,7 @@
                   required
                 />
               </div>
-              <div class="mb-3 mt-2 col-3">
+              <div class="mb-3 mt-2 col-md-3 col-4">
                 <label for="numero" class="form-label">Número</label>
                 <input
                   type="text"
@@ -392,19 +392,19 @@ export default defineComponent({
   data() {
     return {
       form: {
-        nome: "Kauã Victor Lima de Oliveira",
-        data_nascimento: "2003-10-19",
-        rg: "34131231",
+        nome: "",
+        data_nascimento: "",
+        rg: "",
         escolaridade: "",
-        cpf: "079.824.805-00",
-        sexo: "M",
-        sus: "574236579261111",
+        cpf: "",
+        sexo: "",
+        sus: "",
         estado_civil: "",
         raca_cor: "",
         naturalidade: "",
-        filiacao: "Maria dos Santos Lima",
+        filiacao: "",
 
-        celular: "(77) 99983-1299",
+        celular: "",
 
         rua: "",
         bairro: "",
@@ -453,7 +453,7 @@ export default defineComponent({
       };
 
       api
-        .post("/paciente/create", data, )
+        .post("/paciente/create", data)
         .then((response) => {
           alertInstance(4000, "Paciente Cadastrado com sucesso", "success");
           this.resetform();
@@ -467,29 +467,37 @@ export default defineComponent({
         });
     },
     consultaCep() {
-      
       let cep = masks.maskNumero(this.form.cep);
       if (cep.length === 8) {
         let loader = this.$loading.show();
-        axios.get(`https://viacep.com.br/ws/${cep}/json/`).then((response) => {
-          if (response.data.erro) {
-            this.form.cep = "";
+
+        axios
+          .get(`https://viacep.com.br/ws/${cep}/json/`)
+          .then((response) => {
+            if (response.data.erro) {
+              this.form.cep = "";
+              alertInstance(
+                4000,
+                "CEP inválido! Por favor, digite outro CEP.",
+                "error"
+              );
+              return;
+            }
+
+            this.form.rua = response.data.logradouro;
+            this.form.cidade = response.data.localidade;
+            this.form.uf = response.data.uf;
+            this.form.bairro = response.data.bairro;
+            this.form.codigo_ibge = response.data.ibge;
             alertInstance(
-              4000,
-              "CEP inválido! Por favor, digite outro CEP.",
-              "error"
-            );
-            return;
-          }
-
-          this.form.rua = response.data.logradouro;
-          this.form.cidade = response.data.localidade;
-          this.form.uf = response.data.uf;
-          this.form.bairro = response.data.bairro;
-          this.form.codigo_ibge = response.data.ibge;
-
-          loader.hide();
-        });
+                2000,
+                "Endereço Preenchido",
+                "info"
+              );
+          })
+          .finally(() => {
+            loader.hide();
+          });
       }
     },
     buscaEstados() {

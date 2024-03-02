@@ -46,26 +46,33 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, defineEmits } from 'vue'
 import logoURL from '../assets/logo.png'
+
+const emit = defineEmits();
 
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
 
 const ToggleMenu = () => {
 	is_expanded.value = !is_expanded.value
 	localStorage.setItem("is_expanded", is_expanded.value)
+	emit('eventoFilho', is_expanded);
 }
 </script>
 
 <style lang="scss" scoped>
 aside {
 	display: flex;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 100;
 	flex-direction: column;
 	background-color: var(--dark);
 	color: var(--light);
 	width: calc(2rem + 22px);
 	overflow: hidden;
-	min-height: 100vh;
+	height: 100vh;
 	padding: 1rem;
 	transition: 0.2s ease-in-out;
 
@@ -150,7 +157,6 @@ aside {
 
 			&.router-link-exact-active {
 				background-color: var(--dark-alt);
-				border-right: 5px solid var(--primary);
 
 				.material-icons, .text {
 					color: var(--primary);
@@ -196,7 +202,7 @@ aside {
 	}
 
 	@media (max-width: 1024px) {
-		position: absolute;
+		
 		z-index: 99;
 	}
 }

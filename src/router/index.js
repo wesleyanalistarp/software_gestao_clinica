@@ -12,37 +12,40 @@ const router = createRouter({
 		{
 			path: '/',
 			component: Home,
-			meta: { requiresAuth: true }
+			meta: { requiresAuth: true, showSidebar: true }
 		},
 		{
 			path: '/paciente',
 			name: 'paciente',
 			component: () => import('../views/Paciente.vue'),
-			meta: { requiresAuth: true }
+			meta: { requiresAuth: true, showSidebar: true }
 		},
 		{
 			path: '/team',
 			component: () => import('../views/Team.vue'),
-			meta: { requiresAuth: true }
+			meta: { requiresAuth: true, showSidebar: true }
 		},
 		{
 			path: '/contact',
 			component: () => import('../views/Contacte.vue'),
-			meta: { requiresAuth: true }
+			meta: { requiresAuth: true, showSidebar: true }
 		},
 		{
 			path: '/recepcao',
 			component: () => import('../views/Recepcao.vue'),
-			meta: { requiresAuth: true }
+			meta: { requiresAuth: true, showSidebar: true }
 		},
 		{
 			path: '/anamnese',
 			name: 'anamnese',
-			component: () => import('../views/Anamnese.vue')
+			component: () => import('../views/Anamnese.vue'),
+			meta: { requiresAuth: true, showSidebar: true }
 		},
 		{
 			path: '/login',
-			component: Login
+			name: 'login',
+			component: Login,
+			meta: { requiresAuth: false, showSidebar: false }
 		},
 
 	],

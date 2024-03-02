@@ -1,5 +1,4 @@
 <template>
-    <Sidebar />
     <div>
         <div class="container">
             <div class="card" width="100%" height="60px">
@@ -454,11 +453,6 @@
     </div>
 </template>
 
-<script setup>
-import Sidebar from '../components/Sidebar.vue'
-
-
-</script>
 
 <style scoped>
 .input-number::-webkit-inner-spin-button {

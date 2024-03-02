@@ -1,6 +1,6 @@
 <template>
-  <Sidebar />
-  <div class="container-fluid">
+  <!-- <Sidebar /> -->
+  <div class="container-fluid mb-4">
     <div class="card text-center">
       <div class="col mt-1 mb-1">
         <button

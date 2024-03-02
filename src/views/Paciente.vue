@@ -1,5 +1,4 @@
 <template>
-	<Sidebar />
 	<div class="container-fluid ">
 		<div class="card text-center">
 			<div class="col mt-1 mb-1">
@@ -147,13 +146,9 @@ import { defineComponent } from "vue";
 import api from "../config/axios";
 import { alertInstance } from "../config/alerts";
 import { useAuthStore } from "../stores/AuthStore.js";
-import Sidebar from '../components/Sidebar.vue'
 
 export default defineComponent({
-  name: "Login",
-  components: {
-	Sidebar
-  },
+  name: "Paciente",
   data() {
     return {
       authStore: useAuthStore()

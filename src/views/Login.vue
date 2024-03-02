@@ -98,7 +98,7 @@ export default defineComponent({
         })
         .then((response) => {
           this.authStore.setTokenLocalStorage(response.data.token)
-          this.$router.push("/paciente");
+          this.$router.push("/recepcao");
         })
         .catch((err) => {
           alertInstance(3000, err.response.data.message, "error");

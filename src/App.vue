@@ -1,7 +1,10 @@
 <template>
   <div class="app">
+    <Sidebar v-if="showSidebar" @eventoFilho="funcaoDoPai" />
     <!-- Content -->
-    <router-view />
+    <div id="content" :class="{ 'sidebar_active': is_expanded, 'sidebar': showSidebar }">
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -9,12 +12,17 @@
 import { defineComponent } from "vue";
 import { useAuthStore } from "./stores/AuthStore";
 import { verifyAuth } from "./config/auth";
+import Sidebar from "./components/Sidebar.vue";
 
 export default defineComponent({
   data() {
     return {
       authStore: useAuthStore(),
+      is_expanded: (localStorage.getItem("is_expanded") === 'true') && this.showSidebar,
     };
+  },
+  components: {
+    Sidebar,
   },
   async created() {
     const token = await verifyAuth();
@@ -27,6 +35,16 @@ export default defineComponent({
 		this.$router.push("/login");
 	} */
   },
+  methods: {
+    funcaoDoPai(is_expanded) {
+      this.is_expanded = is_expanded
+    }
+  },
+  computed: {
+    showSidebar() {
+      return this.$route.meta.showSidebar;
+    }
+  }
 });
 </script>
 
@@ -59,6 +77,15 @@ button {
   border: none;
   outline: none;
   background: none;
+}
+
+#content.sidebar {
+  margin-left: 50px;
+  transition: all 0.2s ease-in-out;
+}
+
+#content.sidebar_active {
+  margin-left: 300px;
 }
 
 /* Personaliza toda a barra de rolagem */
