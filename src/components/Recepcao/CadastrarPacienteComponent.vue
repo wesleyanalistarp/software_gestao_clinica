@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <div class="card-body mt-2">
-      <div class="card p-3">
-        <div class="text-center h4 mt-2 mb-3">
+  <div class="mt-2 mb-4">
+    <div class="card p-3">
+      <div class="card-body">
+        <div class="text-center h4">
           Formulário de cadastro do paciente
         </div>
         <form @submit.prevent="cadastrarPaciente" ref="formContainer">
@@ -489,11 +489,7 @@ export default defineComponent({
             this.form.uf = response.data.uf;
             this.form.bairro = response.data.bairro;
             this.form.codigo_ibge = response.data.ibge;
-            alertInstance(
-                2000,
-                "Endereço Preenchido",
-                "info"
-              );
+            alertInstance(2000, "Endereço Preenchido", "info");
           })
           .finally(() => {
             loader.hide();

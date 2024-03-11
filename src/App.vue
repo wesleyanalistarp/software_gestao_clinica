@@ -2,7 +2,7 @@
   <div class="app">
     <Sidebar v-if="showSidebar" @eventoFilho="funcaoDoPai" />
     <!-- Content -->
-    <div id="content" :class="{ 'sidebar_active': is_expanded, 'sidebar': showSidebar }">
+    <div id="content">
       <router-view />
     </div>
   </div>
@@ -56,7 +56,7 @@ export default defineComponent({
   --dark: #22c55e;
   --dark-alt: #395533;
   --light: #f1f5f9;
-  --sidebar-width: 300px;
+  --sidebar-width: 400px;
 }
 
 * {
@@ -68,7 +68,7 @@ export default defineComponent({
 
 body {
   background: var(--light);
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 
 button {
@@ -77,6 +77,12 @@ button {
   border: none;
   outline: none;
   background: none;
+}
+
+#content {
+  overflow-y: scroll;
+  padding: 10px;
+  width: 100%;
 }
 
 #content.sidebar {

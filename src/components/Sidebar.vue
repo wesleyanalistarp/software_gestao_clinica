@@ -63,14 +63,13 @@ const ToggleMenu = () => {
 <style lang="scss" scoped>
 aside {
 	display: flex;
-	position: fixed;
 	top: 0;
 	left: 0;
 	z-index: 100;
 	flex-direction: column;
 	background-color: var(--dark);
 	color: var(--light);
-	width: calc(2rem + 22px);
+	width: calc(2rem + 32px);
 	overflow: hidden;
 	height: 100vh;
 	padding: 1rem;

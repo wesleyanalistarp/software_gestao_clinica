@@ -1,7 +1,7 @@
 <template>
   <!-- <Sidebar /> -->
-  <div class="container-fluid mb-4">
-    <div class="card text-center">
+  <div class="page_content">
+    <div class="card text-center" style="width: 100%">
       <div class="col mt-1 mb-1">
         <button
           class="btn btn-outline-success border 1px solid botoes"
@@ -624,6 +624,10 @@ const tabs = {
 </script>
 
 <style scoped>
+.page_content {
+  height: 100vh;
+}
+
 .botoes:hover, .botoes.active {
   background-color: var(--dark);
   transform: scale(1.1);

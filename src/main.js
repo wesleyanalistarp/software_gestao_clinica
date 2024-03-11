@@ -4,6 +4,8 @@ import router from './router'
 import { createPinia } from 'pinia'
 import { LoadingPlugin } from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 const loadingConfig = {
     // Optional parameters
