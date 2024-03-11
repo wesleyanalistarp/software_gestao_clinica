@@ -3,7 +3,7 @@
     <div class="card p-3">
       <div class="card-body">
         <div class="text-center h4">
-          Formulário de cadastro do paciente
+          Formulário de Cadastro do Paciente
         </div>
         <form @submit.prevent="cadastrarPaciente" ref="formContainer">
           <fieldset class="border rounded-3 h6 p-3">
@@ -369,7 +369,7 @@
           </fieldset>
           <br />
           <div class="button">
-            <button type="submit" class="btn btn-outline-success">
+            <button type="submit" class="btn btn-outline-success" style="height: 40px; width: 120px; margin: 10px;">
               Cadastrar
             </button>
           </div>

@@ -3,7 +3,7 @@
     <div class="card-body mt-2">
       <div class="card p-3">
         <div class="text-center h4 mt-2 mb-3">
-          Formulário de cadastro do profissional
+          Formulário de Cadastro do Profissional
         </div>
         <fieldset class="border rounded-3 h6 p-3">
           <legend class="float-none w-auto px-3 h6">Informações</legend>
@@ -15,7 +15,7 @@
                 class="form-control form-control-sm"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
-                placeholder="Digite o nome do paciente"
+                placeholder="Digite o nome do profissional"
               />
             </div>
             <div class="mb-3 mt-2 col-2">
@@ -250,7 +250,7 @@
         </fieldset>
         <br />
         <div class="button">
-          <button type="submit" class="btn btn-outline-success">
+          <button type="submit" class="btn btn-outline-success" style="height: 40px; width: 120px; margin: 10px;">
             Cadastrar
           </button>
         </div>

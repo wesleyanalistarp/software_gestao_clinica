@@ -32,7 +32,7 @@
 		<div class="collapse" id="formulario_atender">
 			<div class="container ">
 				<div class="card mt-2 p-3">
-					<div class="text-center h4 mt-2 mb-3">Lista dos pacientes em espera</div>
+					<div class="text-center h4 mt-2 mb-3">Lista dos Pacientes em Espera</div>
 					<fieldset class="border rounded-3 h6 p-3 ">
 						<legend class="float-none w-auto px-3 h6 ">Fila prioritária</legend>
 						<table class="table table-hover">
@@ -121,7 +121,7 @@
 		<div class="collapse" id="formulario_buscar">
 			<div class="container-fluid">
 				<div class="card mt-2 p-3">
-					<div class="text-center h4 mt-2 mb-3">Buscar paciente</div>
+					<div class="text-center h4 mt-2 mb-3">Buscar Paciente</div>
 					<fieldset class="border rounded-3 h6 p-3 ">
 						<legend class="float-none w-auto px-3 h6 ">Localizar</legend>
 						<nav class="navbar bg-body-tertiary">

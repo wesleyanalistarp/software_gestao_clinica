@@ -25,7 +25,7 @@
 				<span class="text">PACIENTE</span>
 			</router-link>
 			<router-link to="/team" class="button">
-				<span class="material-icons">group</span>
+				<span class="fa-solid fa-user-doctor material-icons"></span>
 				<span class="text">PROFISSIONAL</span>
 			</router-link>
 			<router-link to="/contact" class="button">

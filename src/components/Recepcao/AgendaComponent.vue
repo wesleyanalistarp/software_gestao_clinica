@@ -1,6 +1,30 @@
 <template>
   <div class="mt-2">
     <div class="card p-3">
+      <div class="card mb-3">
+        <div class="input-group mb-3">
+            <span class="input-group-text m-2" id="inputGroup-sizing-default">Consultar agenda
+            <input type="text" class="form-control m-2" placeholder="Digite o nome do médico " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></span>
+        
+        <select class="form-select font-size-sm m-2" style="width: 190px;">
+            <option selected>Consultar por Especialidade</option>
+            <option value="1">Puxar do banco</option>
+        </select>
+        <button type="button" class="btn btn-outline-success btn-sm mt-2" style="height: 68px;">Buscar agenda</button>
+      </div>
+      <div class="button">
+            <button type="submit" 
+            class="btn btn-outline-success" style="height: 40px; width: 199px; margin: 10px;">
+            <i class="fa-solid fa-plus"></i>
+              Criar agenda médico
+            </button>
+            <button type="submit" 
+            class="btn btn-outline-success" style="height: 40px; width: 270px; margin: 10px;">
+            <i class="fa-solid fa-eye"></i>
+               Agendamento do paciente
+            </button>
+          </div>
+    </div>
       <div class="card-body">
         <div class="text-center h4">Agenda</div>
         <div class="demo-app">
@@ -11,6 +35,7 @@
                 <i>{{ arg.event.title }}</i>
               </template>
             </FullCalendar>
+          
           </div>
         </div>
       </div>
@@ -66,7 +91,7 @@ export default defineComponent({
       this.calendarOptions.weekends = !this.calendarOptions.weekends // update a property
     },
     handleDateSelect(selectInfo) {
-      let title = prompt('Please enter a new title for your event')
+      let title = prompt('Agendar paciente')
       let calendarApi = selectInfo.view.calendar
       
       calendarApi.unselect() // clear date selection

@@ -19,8 +19,18 @@
           @click="tabAtual = 'CadastrarProfissionalComponent'"
           style="height: 70px; width: 130px; margin: 5px"
         >
-          <i class="bi bi-person-add"></i>
+        <i class="fa-solid fa-user-doctor"></i>
           Cadastrar Profissional
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-success border 1px solid botoes"
+          :class="{'active': tabAtual == 'CadastrarConsultorioComponent' }"
+          @click="tabAtual = 'CadastrarConsultorioComponent'"
+          style="height: 70px; width: 130px; margin: 5px"
+        >
+        <i class="fa-solid fa-plus"></i>
+          Cadastrar Consultório
         </button>
         <button
           type="button"
@@ -116,7 +126,7 @@
       <div class="container-fluid">
         <div class="card mt-2 p-3">
           <div class="text-center h4 mt-2 mb-3">
-            Editar informação do paciente
+            Editar Informação do Paciente
           </div>
           <fieldset class="border rounded-3 h6 p-3">
             <legend class="float-none w-auto px-3 h6">Editar</legend>
@@ -144,7 +154,7 @@
     <div class="collapse" id="formulario_ficha">
       <div class="container">
         <div class="card mt-2 p-3">
-          <div class="text-center h4 mt-2 mb-3">Emitir ficha do paciente</div>
+          <div class="text-center h4 mt-2 mb-3">Emitir Ficha do Paciente</div>
           <fieldset class="border rounded-3 h6 p-3">
             <legend class="float-none w-auto px-3 h6">Informações</legend>
             <div
@@ -299,7 +309,7 @@
               </div>
               <div class="mb-2 mt-2 col-3">
                 <label for="exampleInputEmail1" class="form-label"
-                  >Algum tipo de alergia Alergia ?</label
+                  >Algum tipo de alergia ?</label
                 >
                 <input
                   type="text"
@@ -488,7 +498,7 @@
       <div class="container-fluid">
         <div class="card mt-2 p-3">
           <div class="text-center h4 mt-2 mb-3">
-            Formulário para puxar o laudo do paciente
+            Formulário Puxar Laudo do Paciente
           </div>
           <fieldset class="border rounded-3 h6 p-3">
             <legend class="float-none w-auto px-3 h6">Laudo do paciente</legend>
@@ -517,7 +527,7 @@
       <div class="container-fluid">
         <div class="card mt-2 p-3">
           <div class="text-center h4 mt-2 mb-3">
-            Formulário para puxar os exames do paciente
+            Formulário Puxar Exames do Paciente
           </div>
           <fieldset class="border rounded-3 h6 p-3">
             <legend class="float-none w-auto px-3 h6">
@@ -548,7 +558,7 @@
       <div class="container-fluid">
         <div class="card mt-2 p-3">
           <div class="text-center h4 mt-2 mb-3">
-            Formulário para puxar as receitas do paciente
+            Formulário Puxar Receita do Paciente
           </div>
           <fieldset class="border rounded-3 h6 p-3">
             <legend class="float-none w-auto px-3 h6">
@@ -579,7 +589,7 @@
       <div class="container-fluid">
         <div class="card mt-2 p-3">
           <div class="text-center h4 mt-2 mb-3">
-            Formulário para puxar os procedimentos solicitado ao paciente
+            Formulário Puxar os Procedimentos Solicitado ao Paciente
           </div>
           <fieldset class="border rounded-3 h6 p-3">
             <legend class="float-none w-auto px-3 h6">
@@ -611,6 +621,7 @@
 import Sidebar from "../components/Sidebar.vue";
 import CadastrarPacienteComponent from "../components/Recepcao/CadastrarPacienteComponent.vue";
 import CadastrarProfissionalComponent from "../components/Recepcao/CadastrarProfissionalComponent.vue";
+import CadastrarConsultorioComponent from "../components/Recepcao/CadastrarConsultorioComponent.vue";
 import AgendaComponent from "../components/Recepcao/AgendaComponent.vue";
 import { shallowRef } from "vue";
 
@@ -619,6 +630,7 @@ const tabAtual = shallowRef("CadastrarPacienteComponent");
 const tabs = {
   CadastrarPacienteComponent,
   CadastrarProfissionalComponent,
+  CadastrarConsultorioComponent,
   AgendaComponent
 };
 </script>
@@ -650,4 +662,4 @@ const tabs = {
   height: 100%;
   opacity: 1;
 }
-</style>
+</style>../components/Recepcao/CadastrarConsultorioComponent.vue
