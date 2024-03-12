@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Recepcao from '../views/Recepcao.vue'
+import Profissional from '../views/Profissional.vue'
 import { useAuthStore } from '../stores/AuthStore';
 import Anamnese from '../views/Anamnese.vue'
 import { verifyAuth } from '../config/auth';
@@ -21,8 +22,8 @@ const router = createRouter({
 			meta: { requiresAuth: true, showSidebar: true }
 		},
 		{
-			path: '/team',
-			component: () => import('../views/Team.vue'),
+			path: '/profissional',
+			component: () => import('../views/Profissional.vue'),
 			meta: { requiresAuth: true, showSidebar: true }
 		},
 		{

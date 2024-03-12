@@ -414,16 +414,16 @@
                   placeholder="Digite o registro"
                 />
               </div>
-              <div class="mb-3 mt-2 col-2">
-                <label for="exampleInputEmail1" class="form-label">Valor</label>
-                <input
-                  type="text"
-                  class="form-control form-control-sm"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                  placeholder="R$"
-                />
-              </div>
+                <div class="mb-3 mt-2 col-2">
+                  <label for="exampleInputEmail1" class="form-label">Valor</label>
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="R$"
+                  />
+                </div>
               <hr />
             </div>
 

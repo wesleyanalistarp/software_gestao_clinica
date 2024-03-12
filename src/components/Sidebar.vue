@@ -22,9 +22,9 @@
 			</router-link>
 			<router-link to="/paciente" class="button">
 				<i class="bi bi-person-check-fill material-icons"></i>
-				<span class="text">PACIENTE</span>
+				<span class="text">PACIENTE?</span>
 			</router-link>
-			<router-link to="/team" class="button">
+			<router-link to="/profissional" class="button">
 				<span class="fa-solid fa-user-doctor material-icons"></span>
 				<span class="text">PROFISSIONAL</span>
 			</router-link>
