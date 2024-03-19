@@ -20,18 +20,18 @@
 				<i class="bi bi-person-workspace material-icons"></i>
 				<span class="text">RECEPÇÃO</span>
 			</router-link>
-			<router-link to="/paciente" class="button">
+			<!-- <router-link to="/paciente" class="button">
 				<i class="bi bi-person-check-fill material-icons"></i>
 				<span class="text">PACIENTE?</span>
-			</router-link>
+			</router-link> -->
 			<router-link to="/profissional" class="button">
 				<span class="fa-solid fa-user-doctor material-icons"></span>
 				<span class="text">PROFISSIONAL</span>
 			</router-link>
-			<router-link to="/contact" class="button">
+			<!-- <router-link to="/contact" class="button">
 				<span class="material-icons">email</span>
 				<span class="text">AGENDA</span>
-			</router-link>
+			</router-link> -->
 		</div>
 
 		<div class="flex"></div>
