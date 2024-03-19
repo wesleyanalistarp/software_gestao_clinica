@@ -2,9 +2,7 @@
   <div class="mt-2 mb-4">
     <div class="card p-3">
       <div class="card-body">
-        <div class="text-center h4">
-          Formulário de Cadastro do Paciente
-        </div>
+        <div class="text-center h4">Formulário de Cadastro do Paciente</div>
         <form @submit.prevent="cadastrarPaciente" ref="formContainer">
           <fieldset class="border rounded-3 h6 p-3">
             <legend class="float-none w-auto px-3 h6">Informações</legend>
@@ -369,7 +367,11 @@
           </fieldset>
           <br />
           <div class="button">
-            <button type="submit" class="btn btn-outline-success" style="height: 40px; width: 120px; margin: 10px;">
+            <button
+              type="submit"
+              class="btn btn-outline-success"
+              style="height: 40px; width: 120px; margin: 10px"
+            >
               Cadastrar
             </button>
           </div>
@@ -386,6 +388,11 @@ import { alertInstance } from "../../config/alerts.js";
 import api from "../../config/axios.js";
 import axios from "axios";
 import moment from "moment";
+import {
+  buscaCep,
+  buscaEstados,
+  buscaMunicipios,
+} from "../../utils/requests.js";
 
 export default defineComponent({
   name: "CadastrarPacienteComponent",
@@ -466,56 +473,44 @@ export default defineComponent({
           loader.hide();
         });
     },
-    consultaCep() {
+    async consultaCep() {
       let cep = masks.maskNumero(this.form.cep);
       if (cep.length === 8) {
         let loader = this.$loading.show();
 
-        axios
-          .get(`https://viacep.com.br/ws/${cep}/json/`)
-          .then((response) => {
-            if (response.data.erro) {
-              this.form.cep = "";
-              alertInstance(
-                4000,
-                "CEP inválido! Por favor, digite outro CEP.",
-                "error"
-              );
-              return;
-            }
+        let endereco = await buscaCep(cep);
 
-            this.form.rua = response.data.logradouro;
-            this.form.cidade = response.data.localidade;
-            this.form.uf = response.data.uf;
-            this.form.bairro = response.data.bairro;
-            this.form.codigo_ibge = response.data.ibge;
-            alertInstance(2000, "Endereço Preenchido", "info");
-          })
-          .finally(() => {
-            loader.hide();
-          });
+        if (!endereco) {
+          alertInstance(
+            4000,
+            "CEP inválido! Por favor, digite outro CEP.",
+            "error"
+          );
+          this.form.cep = "";
+          loader.hide();
+          return;
+        }
+
+        this.form.rua = endereco.logradouro;
+        this.form.cidade = endereco.localidade;
+        this.form.uf = endereco.uf;
+        this.form.bairro = endereco.bairro;
+        this.form.codigo_ibge = endereco.ibge;
+        alertInstance(2000, "Endereço Preenchido", "info");
+
+        loader.hide();
       }
     },
-    buscaEstados() {
-      axios
-        .get("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
-        .then((response) => {
-          this.estados = response.data.sort((a, b) =>
-            a.sigla.localeCompare(b.sigla)
-          );
-        });
+    async buscaEstados() {
+      let estados = await buscaEstados();
+      this.estados = estados.sort((a, b) => a.sigla.localeCompare(b.sigla));
     },
-    buscaMunicipios() {
+    async buscaMunicipios() {
       if (!isNaN(this.uf_naturalidade)) {
-        axios
-          .get(
-            `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${this.uf_naturalidade}/municipios`
-          )
-          .then((response) => {
-            this.municipios = response.data.sort((a, b) =>
-              a.nome.localeCompare(b.nome)
-            );
-          });
+        let municipios = await buscaMunicipios(this.uf_naturalidade);
+        this.municipios = municipios.sort((a, b) =>
+          a.nome.localeCompare(b.nome)
+        );
       }
     },
     resetform() {
