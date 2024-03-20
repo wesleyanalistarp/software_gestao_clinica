@@ -243,40 +243,37 @@
                 </select>
               </div>
 
-              <div class="mb-3 mt-2 col-4" v-if="this.form.perfil['002']">
-                <label for="exampleInputEmail1" class="form-label">CRM</label>
-                <input
-                  type="number"
-                  class="form-control form-control-sm"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                  placeholder="Digite o número do CRM"
-                  required
-                />
-              </div>
-              <div class="mb-3 mt-2 col-4" v-if="this.form.perfil['002']">
-                <label for="exampleInputEmail1" class="form-label">CBO</label>
-                <input
-                  type="number"
-                  class="form-control form-control-sm"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                  placeholder="Código brasileiro de ocupação"
-                  required
-                />
-              </div>
-              <div class="mb-3 mt-2 col-4" v-if="this.form.perfil['002']">
-                <label for="exampleInputEmail1" class="form-label"
-                  >Especialidade</label
-                >
-                <select
-                  class="form-select form-select-sm"
-                  aria-label="Small select example"
-                  required
-                >
-                  <option selected>Selecione</option>
-                  <option value="1">Puxar do banco</option>
+              <div class="mb-3 mt-2 col-md-6 col-12" v-show="this.form.perfil['002']">
+                <label for="exampleInputEmail1" class="form-label">Especialidade</label>
+                <select class="form-control choices-multiple" v-model="form.especialidade" id="select-especialidade" multiple :required="this.form.perfil['002']">
+                  <option :value="especialidade.id" v-for="(especialidade, index ) in especialidades" :key="index">{{ especialidade.nome }}</option>
                 </select>
+              </div>
+
+              <div class="mb-3 mt-2 col-md-3 col-12" v-show="this.form.perfil['002']">
+                <label for="crm" class="form-label">CRM</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="crm"
+                  v-model="form.crm"
+                  placeholder="Digite o número do CRM"
+                  :required="this.form.perfil['002']"
+                />
+              </div>
+              <div class="mb-3 mt-2 col-md-3 col-12" v-show="this.form.perfil['002']">
+                <label for="cbo" class="form-label">CBO</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="cbo"
+                  @input="formatarCampo($event, 'maskNumero')"
+                  data-mascara="cbo"
+                  maxlength="6"
+                  placeholder="Digite o número do CBO"
+                  v-model="form.cbo"
+                  :required="this.form.perfil['002']"
+                />
               </div>
             </div>
           </fieldset>
@@ -378,6 +375,7 @@ import { defineComponent } from "vue";
 import { masks } from "../../utils/mascara.js";
 import { alertInstance } from "../../config/alerts.js";
 import api from "../../config/axios.js";
+import Choices from 'choices.js';
 import {
   buscaCep,
   buscaEstados,
@@ -406,7 +404,7 @@ export default defineComponent({
 
         crm: "",
         cbo: "",
-        especialidade: {},
+        especialidade: [],
 
         rua: "",
         bairro: "",
@@ -424,9 +422,14 @@ export default defineComponent({
       especialidades: []
     };
   },
-  mounted() {
-    this.buscaEstados();
-    this.buscaPerfis();
+  async mounted() {
+    await this.buscaEstados();
+    await this.buscaPerfis();
+    await this.buscaEspecialidades();
+
+    const selectElement = document.querySelector('#select-especialidade');
+    const choices = new Choices(selectElement);
+
   },
   methods: {
     formatarCampo(e, campo) {
@@ -456,7 +459,10 @@ export default defineComponent({
         estado_civil: parseInt(this.form.estado_civil),
         escolaridade: parseInt(this.form.escolaridade),
         filiacao: this.form.filiacao,
-        perfil: this.form.perfil
+        perfil: this.form.perfil,
+        especialidade: this.form.especialidade,
+        crm: this.form.crm,
+        cbo: this.form.cbo
       };
 
       api
@@ -522,6 +528,7 @@ export default defineComponent({
       this.estados = estados.sort((a, b) => a.sigla.localeCompare(b.sigla));
     },
     async buscaMunicipios() {
+      console.log(this.form)
       if (!isNaN(this.uf_naturalidade)) {
         let municipios = await buscaMunicipios(this.uf_naturalidade);
         this.municipios = municipios.sort((a, b) =>
@@ -535,6 +542,8 @@ export default defineComponent({
         if (this.form.hasOwnProperty(key)) {
           if (typeof this.form[key] === 'object') {
             this.form[key] = {};
+          }else if (typeof this.form[key] === 'array'){
+            this.form[key] = [];
           }else{
             this.form[key] = "";
           }
@@ -544,3 +553,11 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="css">
+@import 'choices.js/public/assets/styles/choices.min.css';
+
+.choices__list--multiple .choices__item {
+  background-color: var(--dark) !important;
+}
+</style>
