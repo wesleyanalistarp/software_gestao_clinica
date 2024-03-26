@@ -22,3 +22,11 @@ export const alertInstance = (duracao, mensagem, icon, redirecionamento = null) 
     title: mensagem
   });
 }
+
+export const alertModal = (title, html, icon) => {
+  const alert = Swal.fire({
+    title,
+    html,
+    icon
+  });
+}

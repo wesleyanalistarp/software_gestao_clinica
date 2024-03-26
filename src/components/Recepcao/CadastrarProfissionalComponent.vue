@@ -6,8 +6,8 @@
         <form @submit.prevent="submit" ref="formContainer">
           <fieldset class="border rounded-3 h6 p-3">
             <legend class="float-none w-auto px-3 h6">Perfil</legend>
-            <div class="row">
-              <div class="12">
+            <div class="row" id="checks_perfil">
+              <div>
                 <div
                   class="form-check form-check-inline"
                   v-for="(perfil, index) in perfis"
@@ -16,9 +16,10 @@
                   <input
                     class="form-check-input"
                     type="checkbox"
+                    @change="clickPerfil"
                     :id="index"
-                    :value="perfil.codigo"
-                    v-model="form.perfil[perfil.codigo]"
+                    :value="perfil.id"
+                    v-model="form.perfil"
                   />
                   <label class="form-check-label" :for="index">{{
                     perfil.nome
@@ -243,14 +244,28 @@
                 </select>
               </div>
 
-              <div class="mb-3 mt-2 col-md-6 col-12" v-show="this.form.perfil['002']">
-                <label for="exampleInputEmail1" class="form-label">Especialidade</label>
-                <select class="form-control choices-multiple" v-model="form.especialidade" id="select-especialidade" multiple :required="this.form.perfil['002']">
-                  <option :value="especialidade.id" v-for="(especialidade, index ) in especialidades" :key="index">{{ especialidade.nome }}</option>
+              <div class="mb-3 mt-2 col-md-6 col-12" v-show="isMedico">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Especialidade</label
+                >
+                <select
+                  class="form-control choices-multiple"
+                  v-model="form.especialidade"
+                  id="select-especialidade"
+                  multiple
+                  :required="isMedico"
+                >
+                  <option
+                    :value="especialidade.id"
+                    v-for="(especialidade, index) in especialidades"
+                    :key="index"
+                  >
+                    {{ especialidade.nome }}
+                  </option>
                 </select>
               </div>
 
-              <div class="mb-3 mt-2 col-md-3 col-12" v-show="this.form.perfil['002']">
+              <div class="mb-3 mt-2 col-md-3 col-12" v-show="isMedico">
                 <label for="crm" class="form-label">CRM</label>
                 <input
                   type="text"
@@ -258,10 +273,10 @@
                   id="crm"
                   v-model="form.crm"
                   placeholder="Digite o número do CRM"
-                  :required="this.form.perfil['002']"
+                  :required="isMedico"
                 />
               </div>
-              <div class="mb-3 mt-2 col-md-3 col-12" v-show="this.form.perfil['002']">
+              <div class="mb-3 mt-2 col-md-3 col-12" v-show="isMedico">
                 <label for="cbo" class="form-label">CBO</label>
                 <input
                   type="text"
@@ -272,7 +287,7 @@
                   maxlength="6"
                   placeholder="Digite o número do CBO"
                   v-model="form.cbo"
-                  :required="this.form.perfil['002']"
+                  :required="isMedico"
                 />
               </div>
             </div>
@@ -373,9 +388,9 @@
 <script>
 import { defineComponent } from "vue";
 import { masks } from "../../utils/mascara.js";
-import { alertInstance } from "../../config/alerts.js";
+import { alertInstance, alertModal } from "../../config/alerts.js";
 import api from "../../config/axios.js";
-import Choices from 'choices.js';
+import Choices from "choices.js";
 import {
   buscaCep,
   buscaEstados,
@@ -413,13 +428,14 @@ export default defineComponent({
         cep: "",
         numero: "",
         codigo_ibge: null,
-        perfil: {}
+        perfil: [],
       },
       uf_naturalidade: "",
       estados: [],
       municipios: [],
       perfis: [],
-      especialidades: []
+      especialidades: [],
+      isMedico: false,
     };
   },
   async mounted() {
@@ -427,9 +443,13 @@ export default defineComponent({
     await this.buscaPerfis();
     await this.buscaEspecialidades();
 
-    const selectElement = document.querySelector('#select-especialidade');
+    const selectElement = document.querySelector("#select-especialidade");
     const choices = new Choices(selectElement);
-
+  },
+  computed: {
+    isAtLeastOneSelected() {
+      return this.form.perfil.length > 0; // verifica se pelo menos uma opção está selecionada
+    },
   },
   methods: {
     formatarCampo(e, campo) {
@@ -438,6 +458,19 @@ export default defineComponent({
       );
     },
     submit() {
+      if (!this.isAtLeastOneSelected) {
+        alertInstance(
+          3000,
+          "É necessário informar pelo menos um perfil",
+          "info"
+        );
+        const element = document.getElementById("content");
+
+        console.log(
+          element.scroll({ top: 0, behavior: "smooth" })
+        );
+      }
+
       let loader = this.$loading.show();
       const data = {
         nome: this.form.nome,
@@ -462,17 +495,28 @@ export default defineComponent({
         perfil: this.form.perfil,
         especialidade: this.form.especialidade,
         crm: this.form.crm,
-        cbo: this.form.cbo
+        cbo: this.form.cbo,
       };
 
       api
         .post("/profissional/create", data)
         .then((response) => {
-          alertInstance(4000, "Profissional Cadastrado com sucesso", "success");
           this.resetform();
+
+          console.log(response.data);
+
+          alertModal(
+            "Profissional Cadastrado",
+            `
+            <h2>Dados de acesso:</h2>
+            <strong>Login:</strong> ${response.data.login}<br>
+            <strong>Senha:</strong> ${response.data.senha}
+          `,
+            "success"
+          );
         })
         .catch((err) => {
-          console.log("deu ruim");
+          alertInstance('3000', 'Ocorreu um erro ao salvar o profissional.', 'error')
           console.log(err);
         })
         .finally(() => {
@@ -528,7 +572,7 @@ export default defineComponent({
       this.estados = estados.sort((a, b) => a.sigla.localeCompare(b.sigla));
     },
     async buscaMunicipios() {
-      console.log(this.form)
+      console.log(this.form);
       if (!isNaN(this.uf_naturalidade)) {
         let municipios = await buscaMunicipios(this.uf_naturalidade);
         this.municipios = municipios.sort((a, b) =>
@@ -536,15 +580,26 @@ export default defineComponent({
         );
       }
     },
+    async clickPerfil() {
+      let isMedico = false;
+      this.form.perfil.forEach((value) => {
+        let perfil = this.perfis.find((pe) => pe.id == value);
+
+        if (perfil.codigo == "002") {
+          isMedico = true;
+        }
+      });
+      this.isMedico = isMedico;
+    },
     resetform() {
       this.uf_naturalidade = "";
       for (let key in this.form) {
         if (this.form.hasOwnProperty(key)) {
-          if (typeof this.form[key] === 'object') {
+          if (typeof this.form[key] === "object") {
             this.form[key] = {};
-          }else if (typeof this.form[key] === 'array'){
+          } else if (typeof this.form[key] === "array") {
             this.form[key] = [];
-          }else{
+          } else {
             this.form[key] = "";
           }
         }
@@ -555,7 +610,7 @@ export default defineComponent({
 </script>
 
 <style lang="css">
-@import 'choices.js/public/assets/styles/choices.min.css';
+@import "choices.js/public/assets/styles/choices.min.css";
 
 .choices__list--multiple .choices__item {
   background-color: var(--dark) !important;
