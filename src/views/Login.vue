@@ -18,7 +18,7 @@
           <h2 class="title title-second">Preencha para acessar o sistema</h2>
           <form action="#" class="form" v-on:submit.prevent="login">
             <label class="label-input" for="">
-              <i class="fas fa-envelope icon-modify"></i>
+              <i class="fa-solid fa-user icone"></i>
               <input
                 type="text"
                 v-model="usuario"
@@ -26,12 +26,8 @@
               />
             </label>
             <label class="label-input" for="">
-              <i class="fas fa-fingerprint icon-modify"></i>
-              <input
-                type="password"
-                v-model="senha"
-                placeholder="Digite sua senha"
-              />
+              <i class="fa-solid fa-lock icone"></i>
+              <input type="password" v-model="senha" placeholder=" Digite sua senha"  />
             </label>
             <button class="btn btn-second">Login</button>
           </form>
@@ -276,6 +272,9 @@ export default defineComponent({
 .icon-modify {
   color: #7f8c8d;
   padding: 0 5px;
+}
+.icone{
+  margin-right:10px;
 }
 
 /**second-content**/

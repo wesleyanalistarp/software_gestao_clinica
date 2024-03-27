@@ -1,18 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import Laboratorio from '../views/Laboratorio.vue'
 import Login from '../views/Login.vue'
 import Recepcao from '../views/Recepcao.vue'
 import Profissional from '../views/Profissional.vue'
 import { useAuthStore } from '../stores/AuthStore';
 import Anamnese from '../views/Anamnese.vue'
+import Administracao from '../views/Administracao.vue'
 import { verifyAuth } from '../config/auth';
+
 
 const router = createRouter({
 	history: createWebHistory(),
 	routes: [
 		{
-			path: '/',
-			component: Home,
+			path: '/laboratorio',
+			component: Laboratorio,
 			meta: { requiresAuth: true, showSidebar: true }
 		},
 		{
@@ -27,8 +29,8 @@ const router = createRouter({
 			meta: { requiresAuth: true, showSidebar: true }
 		},
 		{
-			path: '/contact',
-			component: () => import('../views/Contacte.vue'),
+			path: '/administracao',
+			component: () => import('../views/Administracao.vue'),
 			meta: { requiresAuth: true, showSidebar: true }
 		},
 		{

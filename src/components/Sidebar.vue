@@ -12,25 +12,25 @@
 
 		<h3>Menu</h3>
 		<div class="menu">
-			<router-link to="/" class="button">
-				<i class="bi bi-graph-up-arrow material-icons"></i>
-				<span class="text">DASBOARD</span>
+			<router-link to="/laboratorio" class="button">
+				<i class="fa-solid fa-vial-virus material-icons"></i>
+				<span class="text">LABORATÓRIO</span>
 			</router-link>
 			<router-link to="/recepcao" class="button">
 				<i class="bi bi-person-workspace material-icons"></i>
 				<span class="text">RECEPÇÃO</span>
 			</router-link>
-			<!-- <router-link to="/paciente" class="button">
-				<i class="bi bi-person-check-fill material-icons"></i>
-				<span class="text">PACIENTE?</span>
-			</router-link> -->
 			<router-link to="/profissional" class="button">
 				<span class="fa-solid fa-user-doctor material-icons"></span>
 				<span class="text">PROFISSIONAL</span>
 			</router-link>
-			<!-- <router-link to="/contact" class="button">
-				<span class="material-icons">email</span>
-				<span class="text">AGENDA</span>
+			<router-link to="/administracao" class="button">
+				<span class="fa-solid fa-sitemap material-icons"></span>
+				<span class="text">ADMINISTRAÇÃO</span>
+			</router-link>
+			<!-- <router-link to="/laboratorio" class="button">
+				<span class="fa-solid fa-vial-virus material-icons"></span>
+				<span class="text">LABORATÓRIO</span>
 			</router-link> -->
 		</div>
 

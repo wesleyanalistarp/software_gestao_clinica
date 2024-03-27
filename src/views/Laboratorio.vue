@@ -6,25 +6,25 @@
 					<button type="button" class="btn btn-outline-success border 1px solid botoes"
 						data-bs-toggle="collapse" data-bs-target="#formulario_atender" role="button"
 						area-expanded="false" aria-controls="formulario_busca"
-						style="height: 70px; width: 110px; margin: 5px; "><i class="bi bi-caret-right-square"></i>
-						Atender</button>
+						style="height: 70px; width: 140px; margin: 5px; "><i class="fa-solid fa-list-check"></i>>
+						Indicadores</button>
 					<button type="button" class="btn btn-outline-success border 1px solid botoes"
-						style="height: 70px; width: 110px; margin: 5px; "><i class="bi bi-clipboard2-pulse"></i>
-						Exames</button>
+						style="height: 70px; width: 140px; margin: 5px; "><i class="fa-solid fa-hand-holding-dollar"></i>
+						Financeiro</button>
 					<button type="button" class="btn btn-outline-success border 1px solid botoes"
 						data-bs-toggle="collapse" data-bs-target="#formulario_buscar" role="button"
 						area-expanded="false" aria-controls="collapseExample"
-						style="height: 70px; width: 110px; margin: 5px; "><i class="bi bi-search"></i>
-						Buscar</button>
+						style="height: 70px; width: 140px; margin: 5px; "><i class="fa-solid fa-hospital-user"></i>
+						Convênio</button>
 					<button type="button" class="btn btn-outline-success border 1px solid botoes"
-						style="height: 70px; width: 110px; margin: 5px; "><i class="bi bi-file-earmark-medical"></i>
-						Laudo</button>
+						style="height: 70px; width: 140px; margin: 5px; "><i class="fa-solid fa-chart-pie"></i>
+						Patrimônio</button>
 					<button type="button" class="btn btn-outline-success border 1px solid botoes"
-						style="height: 70px; width: 110px; margin: 5px; "><i class="bi bi-file-text"></i>
-						Receita</button>
+						style="height: 70px; width: 140px; margin: 5px; "><i class="fa-regular fa-file"></i>
+						Notas</button>
 					<button type="button" class="btn btn-outline-success border 1px solid botoes"
-						style="height: 70px; width: 160px; margin: 5px; "><i class="bi bi-heart-pulse"></i>
-						Procedimento</button>
+						style="height: 70px; width: 150px; margin: 5px; "><i class="fa-solid fa-stethoscope"></i>
+						Profissionais</button>
 				</div>
 			</div>
 		</div>
@@ -167,26 +167,9 @@
 		<!--fim do formulário buscar-->
 	</div>
 </template>
-
-<script>
-import { defineComponent } from "vue";
-import api from "../config/axios";
-import { alertInstance } from "../config/alerts";
-import { useAuthStore } from "../stores/AuthStore.js";
-
-export default defineComponent({
-	name: "Paciente",
-	data() {
-		return {
-			authStore: useAuthStore()
-		};
-	},
-	mounted() {
-		console.log(this.authStore.token)
-	}
-});
+<script setup>
+import Sidebar from "../components/Sidebar.vue";
 </script>
-
 <style scoped>
 .botoes:hover {
 	background-color: var(--dark);
