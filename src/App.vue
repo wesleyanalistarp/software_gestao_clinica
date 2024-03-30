@@ -25,7 +25,7 @@ export default defineComponent({
     Sidebar,
   },
   async created() {
-    const token = await verifyAuth();
+    const {senha_padrao, token} = await verifyAuth();
     if (token) {
       this.authStore.token = token;
       this.authStore.isAuth = true;

@@ -1,10 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
-import Recepcao from '../views/Recepcao.vue'
-import Profissional from '../views/Profissional.vue'
 import { useAuthStore } from '../stores/AuthStore';
-import Anamnese from '../views/Anamnese.vue'
 import { verifyAuth } from '../config/auth';
 
 const router = createRouter({
@@ -12,7 +7,7 @@ const router = createRouter({
 	routes: [
 		{
 			path: '/',
-			component: Home,
+			component: () => import('../views/Home.vue'),
 			meta: { requiresAuth: true, showSidebar: true }
 		},
 		{
@@ -45,7 +40,13 @@ const router = createRouter({
 		{
 			path: '/login',
 			name: 'login',
-			component: Login,
+			component: () => import('../views/Login.vue'),
+			meta: { requiresAuth: false, showSidebar: false }
+		},
+		{
+			path: '/alterar_senha',
+			name: 'alterar_senha',
+			component: () => import('../views/AlterarSenha.vue'),
 			meta: { requiresAuth: false, showSidebar: false }
 		},
 
@@ -58,19 +59,25 @@ router.beforeEach(async (to, from, next) => {
 	const authStore = useAuthStore();
 
 	if (!authStore.token) {
-		const token = await verifyAuth();
+		const {senha_padrao, token} = await verifyAuth();
+
+		
 		if (token) {
 			authStore.token = token;
 			authStore.isAuth = true;
+		}
+		
+		if (senha_padrao == true) {
+			return next('/alterar_senha')
 		}
 	}
 
 	if ((to.meta.requiresAuth && !authStore.isAuth)) {
 		// Se a rota requer autenticação e o usuário não está autenticado, redirecione para a página de login ou para onde desejar
-		next('/login')
+		return next('/login')
 	} else {
 		// Se a autenticação não é necessária ou o usuário está autenticado, continue normalmente
-		next()
+		return next()
 	}
 })
 

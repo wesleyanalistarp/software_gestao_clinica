@@ -134,7 +134,6 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 15vw;
   height: 100vh;
 
   font-family: "Open Sans", sans-serif;

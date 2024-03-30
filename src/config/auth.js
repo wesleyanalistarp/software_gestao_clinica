@@ -14,9 +14,9 @@ export const verifyAuth = async () => {
     }
 
     try {
-        await api.post('/auth/verify', {}, config)
+        const response = await api.get('/auth/verify', {}, config)
 
-        return token;
+        return { senha_padrao: response.data, token: token };
     } catch (err) {
 
         return false;
