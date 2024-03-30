@@ -1,63 +1,56 @@
 <template>
     <div>
-        <fieldset>
-            <h4>Ficha do Paciente</h4>
-            <h6>Clinica IRM Vitória da Conquista</h6>
-        </fieldset>
-        <fieldset>
-            <legend>Informações pessoais</legend>
-            <div class="row">
-                <div class="text">
-                    Paciente:
+        <div id="ficha" ref="testHtml">
+            <h1>Test heading </h1>
+            <div class="card">
+                <div class="card-header">
+                    Featured
                 </div>
-                <div class="text">
-                    Consulta Retorno: 
-                </div>
-                <div class="text">
-                    Nascimento: 
-                </div>
-                <div class="text">
-                    Tipo: 
-                </div>
-                <div class="text">
-                    Exame: 
-                </div>
-                <div class="text">
-                    Comorbidade: 
-                </div>
-                <div class="text">
-                    Especialista: 
-                </div>
-                <div class="text">
-                    Profissional: 
-                </div>
-                <div class="text">
-                    Sala: 
-                </div>
-                <div class="text">
-                    Consultório: 
-                </div>
-                <div class="text">
-                    Alergia a medicamento: 
-                </div>
-                <div class="text">
-                    Uso de medicamento contínuo: 
-                </div>
-                <div class="text">
-                    Mãe: 
-                </div>
-                <div class="text">
-                    Acompanhante: 
-                </div>
-                <div class="text">
-                    Gestante: 
-                </div>
-                <div class="text">
-                    Mêses: 
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
-        </fieldset>
-        
+            <div class="card">
+                <div class="card-header">
+                    Featured
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+            <button class="btn btn-danger" @click="generatePdf">generate PDF</button>
+        </div>
     </div>
 </template>
+<script>
+new Vue({
+    el: '#ficha',
+    data() {
+        return {
+            message: 'Hi my first vue code pen!!!'
+        }
+    },
+    methods: {
+        //jspdf does not include the bootstrap style layout
+        generatePdf() {
+            var doc = new jsPDF('p', 'pt', 'A4');
+            margins = {
+                top: 80,
+                bottom: 60,
+                left: 40,
+                width: 522
+            };
 
+            doc.fromHTML(this.$refs.testHtml, margins.left, margins.top, {
+                'width': margins.width
+            });
+
+            doc.save('test.pdf');
+        }
+    }
+})
+</script>

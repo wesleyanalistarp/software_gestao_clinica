@@ -2,12 +2,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '../stores/AuthStore';
 import { verifyAuth } from '../config/auth';
 
+
 const router = createRouter({
 	history: createWebHistory(),
 	routes: [
 		{
-			path: '/',
-			component: () => import('../views/Home.vue'),
+			path: '/laboratorio',
+			component: () => import('../views/Laboratorio.vue'),
 			meta: { requiresAuth: true, showSidebar: true }
 		},
 		{
@@ -22,8 +23,8 @@ const router = createRouter({
 			meta: { requiresAuth: true, showSidebar: true }
 		},
 		{
-			path: '/contact',
-			component: () => import('../views/Contacte.vue'),
+			path: '/administracao',
+			component: () => import('../views/Administracao.vue'),
 			meta: { requiresAuth: true, showSidebar: true }
 		},
 		{
@@ -66,7 +67,7 @@ router.beforeEach(async (to, from, next) => {
 			authStore.token = token;
 			authStore.isAuth = true;
 		}
-		
+
 		if (senha_padrao == true) {
 			return next('/alterar_senha')
 		}

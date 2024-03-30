@@ -32,28 +32,28 @@
           style="height: 70px; width: 130px; margin: 5px">
           <i class="bi bi-person-lines-fill"></i> Ficha
         </button>
-        <button type="button" class="btn btn-outline-success border 1px solid botoes" data-bs-toggle="collapse"
-          data-bs-target="#formulario_editar" role="button" area-expanded="false" aria-controls="formulario_busca"
+        <button type="button" class="btn btn-outline-success border 1px solid botoes"
+        :class="{ 'active': tabAtual == 'EditarComponent' }" @click="tabAtual = 'EditarComponent'"
           style="height: 70px; width: 110px; margin: 5px">
           <i class="bi bi-pencil-square"></i> Editar
         </button>
-        <button type="button" class="btn btn-outline-success border 1px solid botoes" data-bs-toggle="collapse"
-          data-bs-target="#formulario_laudo" role="button" area-expanded="false" aria-controls="collapseExample"
+        <button type="button" class="btn btn-outline-success border 1px solid botoes" 
+        :class="{ 'active': tabAtual == 'LaudoComponent' }" @click="tabAtual = 'LaudoComponent'"
           style="height: 70px; width: 110px; margin: 5px">
           <i class="bi bi-file-earmark-medical"></i> Laudo
         </button>
-        <button type="button" class="btn btn-outline-success border 1px solid botoes" data-bs-toggle="collapse"
-          data-bs-target="#formulario_exames" role="button" area-expanded="false" aria-controls="collapseExample"
+        <button type="button" class="btn btn-outline-success border 1px solid botoes" 
+        :class="{ 'active': tabAtual == 'ExamesComponent' }" @click="tabAtual = 'ExamesComponent'"
           style="height: 70px; width: 110px; margin: 5px">
           <i class="bi bi-clipboard2-pulse"></i> Exames
         </button>
-        <button type="button" class="btn btn-outline-success border 1px solid botoes" data-bs-toggle="collapse"
-          data-bs-target="#formulario_receita" role="button" area-expanded="false" aria-controls="collapseExample"
+        <button type="button" class="btn btn-outline-success border 1px solid botoes" 
+        :class="{ 'active': tabAtual == 'ReceitaComponent' }" @click="tabAtual = 'ReceitaComponent'"
           style="height: 70px; width: 110px; margin: 5px">
           <i class="bi bi-file-text"></i> Receita
         </button>
-        <button type="button" class="btn btn-outline-success border 1px solid botoes" data-bs-toggle="collapse"
-          data-bs-target="#formulario_procedimento" role="button" area-expanded="false" aria-controls="collapseExample"
+        <button type="button" class="btn btn-outline-success border 1px solid botoes" 
+        :class="{ 'active': tabAtual == 'ProcedimentosComponent' }" @click="tabAtual = 'ProcedimentosComponent'"
           style="height: 70px; width: 160px; margin: 5px">
           <i class="bi bi-heart-pulse"></i> Procedimento
         </button>
@@ -63,139 +63,6 @@
     <transition name="fade" mode="out-in">
       <component :is="tabs[tabAtual]"></component>
     </transition>
-
-    <!--inicio do formulário editar-->
-    <div class="collapse" id="formulario_editar">
-      <div class="container-fluid">
-        <div class="card mt-2 p-3">
-          <div class="text-center h4 mt-2 mb-3">
-            Editar Informação do Paciente
-          </div>
-          <fieldset class="border rounded-3 h6 p-3">
-            <legend class="float-none w-auto px-3 h6">Editar</legend>
-            <nav class="navbar bg-body-tertiary">
-              <div class="container-fluid">
-                <form class="d-flex w-100" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Digite o nome do paciente"
-                    aria-label="Search" />
-                  <button class="btn btn-outline-success" type="submit">
-                    Buscar
-                  </button>
-                </form>
-              </div>
-            </nav>
-          </fieldset>
-        </div>
-      </div>
-    </div>
-    <!--fim do formulário editar-->
-
-    <!--inicio do formulário laudo-->
-    <div class="collapse" id="formulario_laudo">
-      <div class="container-fluid">
-        <div class="card mt-2 p-3">
-          <div class="text-center h4 mt-2 mb-3">
-            Formulário Puxar Laudo do Paciente
-          </div>
-          <fieldset class="border rounded-3 h6 p-3">
-            <legend class="float-none w-auto px-3 h6">Laudo do paciente</legend>
-            <nav class="navbar bg-body-tertiary">
-              <div class="container-fluid">
-                <form class="d-flex w-100" role="search">
-                  <input class="form-control me-2" type="search"
-                    placeholder="Digite o nome do paciente ou o número do registro" aria-label="Search" />
-                  <button class="btn btn-outline-success" type="submit">
-                    Buscar
-                  </button>
-                </form>
-              </div>
-            </nav>
-          </fieldset>
-        </div>
-      </div>
-    </div>
-    <!--fim do formulário laudo-->
-    <!--inicio do formulário exames-->
-    <div class="collapse" id="formulario_exames">
-      <div class="container-fluid">
-        <div class="card mt-2 p-3">
-          <div class="text-center h4 mt-2 mb-3">
-            Formulário Puxar Exames do Paciente
-          </div>
-          <fieldset class="border rounded-3 h6 p-3">
-            <legend class="float-none w-auto px-3 h6">
-              Exames do paciente
-            </legend>
-            <nav class="navbar bg-body-tertiary">
-              <div class="container-fluid">
-                <form class="d-flex w-100" role="search">
-                  <input class="form-control me-2" type="search"
-                    placeholder="Digite o nome do paciente ou o número do registro" aria-label="Search" />
-                  <button class="btn btn-outline-success" type="submit">
-                    Buscar
-                  </button>
-                </form>
-              </div>
-            </nav>
-          </fieldset>
-        </div>
-      </div>
-    </div>
-    <!--fim do formulário exames-->
-    <!--inicio do formulário receita-->
-    <div class="collapse" id="formulario_receita">
-      <div class="container-fluid">
-        <div class="card mt-2 p-3">
-          <div class="text-center h4 mt-2 mb-3">
-            Formulário Puxar Receita do Paciente
-          </div>
-          <fieldset class="border rounded-3 h6 p-3">
-            <legend class="float-none w-auto px-3 h6">
-              Receita do paciente
-            </legend>
-            <nav class="navbar bg-body-tertiary">
-              <div class="container-fluid">
-                <form class="d-flex w-100" role="search">
-                  <input class="form-control me-2" type="search"
-                    placeholder="Digite o nome do paciente ou o número do registro" aria-label="Search" />
-                  <button class="btn btn-outline-success" type="submit">
-                    Buscar
-                  </button>
-                </form>
-              </div>
-            </nav>
-          </fieldset>
-        </div>
-      </div>
-    </div>
-    <!--fim do formulário receita-->
-    <!--inicio do formulário procedimentos-->
-    <div class="collapse" id="formulario_procedimento">
-      <div class="container-fluid">
-        <div class="card mt-2 p-3">
-          <div class="text-center h4 mt-2 mb-3">
-            Formulário Puxar os Procedimentos Solicitado ao Paciente
-          </div>
-          <fieldset class="border rounded-3 h6 p-3">
-            <legend class="float-none w-auto px-3 h6">
-              Procedimentos do paciente
-            </legend>
-            <nav class="navbar bg-body-tertiary">
-              <div class="container-fluid">
-                <form class="d-flex w-100" role="search">
-                  <input class="form-control me-2" type="search"
-                    placeholder="Digite o nome do paciente ou o número do registro" aria-label="Search" />
-                  <button class="btn btn-outline-success" type="submit">
-                    Buscar
-                  </button>
-                </form>
-              </div>
-            </nav>
-          </fieldset>
-        </div>
-      </div>
-    </div>
-    <!--fim do formulário procedimentos-->
   </div>
 </template>
 <script setup>
@@ -205,6 +72,11 @@ import CadastrarProfissionalComponent from "../components/Recepcao/CadastrarProf
 import CadastrarConsultorioComponent from "../components/Recepcao/CadastrarConsultorioComponent.vue";
 import FormularioFichaComponent from "../components/Recepcao/FormularioFichaComponent.vue";
 import AgendaComponent from "../components/Recepcao/AgendaComponent.vue";
+import EditarComponent from "../components/Recepcao/EditarComponent.vue";
+import LaudoComponent from "../components/Recepcao/LaudoComponent.vue";
+import ExamesComponent from "../components/Recepcao/ExamesComponent.vue";
+import ReceitaComponent from "../components/Recepcao/ReceitaComponent.vue";
+import ProcedimentosComponent from "../components/Recepcao/ProcedimentosComponent.vue";
 import { shallowRef } from "vue";
 
 const tabAtual = shallowRef("CadastrarPacienteComponent");
@@ -214,7 +86,12 @@ const tabs = {
   CadastrarProfissionalComponent,
   CadastrarConsultorioComponent,
   FormularioFichaComponent,
-  AgendaComponent
+  AgendaComponent,
+  EditarComponent,
+  LaudoComponent,
+  ExamesComponent,
+  ReceitaComponent,
+  ProcedimentosComponent
 };
 </script>
 

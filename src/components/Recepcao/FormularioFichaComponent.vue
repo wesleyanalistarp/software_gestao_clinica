@@ -36,6 +36,15 @@
                                 </div>
                             </div>
                             <div class="mb-3 mt-2 col-2">
+                                <label for="exampleInputEmail1" class="form-label">sexo</label>
+                                <select class="form-select form-select-sm" aria-label="Small select example">
+                                    <option selected>Selecione</option>
+                                    <option value="1">Masculino</option>
+                                    <option value="2">Feminino</option>
+                                    <option value="3">Outros</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 mt-2 col-2">
                                 <label for="exampleInputEmail1" class="form-label">Nascimento</label>
                                 <input type="date" class="form-control form-control-sm" id="exampleInputEmail1"
                                     aria-describedby="emailHelp" />
@@ -90,6 +99,16 @@
                                     <option value="comor20">Síndrome de Down</option>
                                 </select>
                             </div>
+                            <div class="mb-3 mt-2 col-2">
+                                <label for="exampleInputEmail1" class="form-label">Prioridade</label>
+                                <select class="form-select form-select-sm" aria-label="Small select example">
+                                    <option selected>Selecione</option>
+                                    <option value="1">Autismo</option>
+                                    <option value="2">Obeso</option>
+                                    <option value="3">Idoso(a)</option>
+                                    <option value="4">Gestante</option>
+                                </select>
+                            </div>
                             <div class="mb-3 mt-2 col-3">
                                 <label for="exampleInputEmail1" class="form-label">Especialista</label>
                                 <select class="form-select form-select-sm" aria-label="Small select example">
@@ -129,17 +148,17 @@
                                 <input type="text" class="form-control form-control-sm" id="exampleInputEmail1"
                                     aria-describedby="emailHelp" placeholder="Qual?" />
                             </div>
-                            <div class="mb-2 mt-2 col-3">
-                                <label for="exampleInputEmail1" class="form-label">Nome da mãe</label>
+                            <div class="mb-2 mt-2 col-2">
+                                <label for="exampleInputEmail1" class="form-label">Mãe</label>
                                 <input type="text" class="form-control form-control-sm" id="exampleInputEmail1"
                                     aria-describedby="emailHelp" placeholder="Nome" />
                             </div>
-                            <div class="mb-2 mt-2 col-3">
+                            <div class="mb-2 mt-2 col-2">
                                 <label for="exampleInputEmail1" class="form-label">Acompanhante</label>
                                 <input type="text" class="form-control form-control-sm" id="exampleInputEmail1"
                                     aria-describedby="emailHelp" placeholder="Nome" />
                             </div>
-                            <div class="mb-2 mt-2 col-3">
+                            <div class="mb-2 mt-2 col-2">
                                 <label for="exampleInputEmail1" class="form-label">Gestante</label>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="flexRadioDefault"
@@ -157,7 +176,7 @@
                                 </div>
                                 <label for="exampleInputEmail1" class="form-label">Quantos mêses?</label>
                                 <input type="text" class="form-control form-control-sm" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp" placeholder="Nome" />
+                                    aria-describedby="emailHelp" placeholder="Digite o tempo aqui" />
                             </div>
                             <div class="mb-3 mt-2 col-6">
                                 <label for="floatingTextarea2">Observação:</label>
