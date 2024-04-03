@@ -47,7 +47,7 @@
 
 <script setup>
 import { ref, defineEmits } from 'vue'
-import logoURL from '../assets/logo.png'
+import logoURL from '../assets/logopronta.png'
 
 const emit = defineEmits();
 
@@ -83,7 +83,8 @@ aside {
 		margin-bottom: 1rem;
 
 		img {
-			width: 2rem;
+			width: 7rem;
+			padding-right:50px;
 		}
 	}
 
