@@ -1,4 +1,4 @@
-import api from './axios'
+import axiosInstance from "./axios";
 
 export const verifyAuth = async () => {
 
@@ -14,7 +14,7 @@ export const verifyAuth = async () => {
     }
 
     try {
-        const response = await api.get('/auth/verify', {}, config)
+        const response = await axiosInstance.get('/auth/verify', {}, config)
 
         return { senha_padrao: response.data, token: token };
     } catch (err) {

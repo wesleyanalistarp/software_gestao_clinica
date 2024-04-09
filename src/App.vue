@@ -24,17 +24,6 @@ export default defineComponent({
   components: {
     Sidebar,
   },
-  async created() {
-    const {senha_padrao, token} = await verifyAuth();
-    if (token) {
-      this.authStore.token = token;
-      this.authStore.isAuth = true;
-    }
-
-    /* if (!is.authStore.isAuth){
-		this.$router.push("/login");
-	} */
-  },
   methods: {
     funcaoDoPai(is_expanded) {
       this.is_expanded = is_expanded

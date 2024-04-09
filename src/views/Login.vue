@@ -27,7 +27,11 @@
             </label>
             <label class="label-input" for="">
               <i class="fa-solid fa-lock icone"></i>
-              <input type="password" v-model="senha" placeholder=" Digite sua senha"  />
+              <input
+                type="password"
+                v-model="senha"
+                placeholder=" Digite sua senha"
+              />
             </label>
             <button class="btn btn-second">Login</button>
           </form>
@@ -68,38 +72,40 @@
 
 <script>
 import { defineComponent } from "vue";
-import api from "../config/axios";
 import { alertInstance } from "../config/alerts";
-import { useAuthStore } from "../stores/AuthStore.js";
+import { useAuthStore } from "../stores/AuthStore";
+import axiosInstance from "../config/axios";
+
+const authStore = useAuthStore();
 
 export default defineComponent({
   name: "Login",
   data() {
     return {
       isRecuperar: false,
-      usuario: "kaua",
-      senha: "1234",
-      authStore: useAuthStore()
+      usuario: "kaua5833",
+      senha: "Layla1234",
     };
   },
   methods: {
     efeitoBtnRecuperar() {
       this.isRecuperar = !this.isRecuperar;
     },
-    login() {
-      api
-        .post("/auth/login", {
+    async login() {
+      try {
+        const { data } = await axiosInstance.post("/auth/login", {
           login: this.usuario,
           senha: this.senha,
-        })
-        .then((response) => {
-          this.authStore.setTokenLocalStorage(response.data.token)
-          this.$router.push("/recepcao");
-        })
-        .catch((err) => {
-          alertInstance(3000, err.response.data.message, "error");
-          this.senha = "";
         });
+        
+        authStore.setToken(data.token)
+        authStore.setUser(data.usuario)
+
+        this.$router.push('recepcao')
+      } catch (err) {
+        alertInstance(3000, err.response.data.message, "error");
+        this.senha = "";
+      }
     },
   },
 });
@@ -272,8 +278,8 @@ export default defineComponent({
   color: #7f8c8d;
   padding: 0 5px;
 }
-.icone{
-  margin-right:10px;
+.icone {
+  margin-right: 10px;
 }
 
 /**second-content**/

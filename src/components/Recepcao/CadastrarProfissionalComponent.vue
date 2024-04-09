@@ -389,7 +389,7 @@
 import { defineComponent } from "vue";
 import { masks } from "../../utils/mascara.js";
 import { alertInstance, alertModal } from "../../config/alerts.js";
-import api from "../../config/axios.js";
+import axiosInstance from "../../config/axios.js";
 import Choices from "choices.js";
 import {
   buscaCep,
@@ -397,6 +397,9 @@ import {
   buscaMunicipios,
 } from "../../utils/requests.js";
 import moment from "moment";
+import { useAuthStore } from "../../stores/AuthStore";
+
+const useAuth = useAuthStore();
 
 export default defineComponent({
   name: "CadastrarProfissionalComponent",
@@ -466,9 +469,7 @@ export default defineComponent({
         );
         const element = document.getElementById("content");
 
-        console.log(
-          element.scroll({ top: 0, behavior: "smooth" })
-        );
+        console.log(element.scroll({ top: 0, behavior: "smooth" }));
       }
 
       let loader = this.$loading.show();
@@ -498,8 +499,12 @@ export default defineComponent({
         cbo: this.form.cbo,
       };
 
-      api
-        .post("/profissional/create", data)
+      axiosInstance
+        .post("/profissional/create", data, {
+          headers: {
+            Authorization: `Bearer ${useAuth.token}`,
+          },
+        })
         .then((response) => {
           this.resetform();
 
@@ -516,7 +521,11 @@ export default defineComponent({
           );
         })
         .catch((err) => {
-          alertInstance('3000', 'Ocorreu um erro ao salvar o profissional.', 'error')
+          alertInstance(
+            "3000",
+            "Ocorreu um erro ao salvar o profissional.",
+            "error"
+          );
           console.log(err);
         })
         .finally(() => {
@@ -525,7 +534,11 @@ export default defineComponent({
     },
     async buscaPerfis() {
       try {
-        let response = await api.get("/permissao/perfil/findAll");
+        let response = await axiosInstance.get("/permissao/perfil/findAll", {
+          headers: {
+            Authorization: `Bearer ${useAuth.token}`,
+          },
+        });
         this.perfis = response.data.perfil;
       } catch (err) {
         alertInstance(1500, err.message, "error");
@@ -533,7 +546,14 @@ export default defineComponent({
     },
     async buscaEspecialidades() {
       try {
-        let response = await api.get("/profissional/especialidade/findAll");
+        let response = await axiosInstance.get(
+          "/profissional/especialidade/findAll",
+          {
+            headers: {
+              Authorization: `Bearer ${useAuth.token}`,
+            },
+          }
+        );
         this.especialidades = response.data.especialidades;
       } catch (err) {
         alertInstance(1500, err.message, "error");
