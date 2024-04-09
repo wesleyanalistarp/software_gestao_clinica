@@ -398,6 +398,7 @@ import {
 } from "../../utils/requests.js";
 import moment from "moment";
 import { useAuthStore } from "../../stores/AuthStore";
+import axios from "axios";
 
 const useAuth = useAuthStore();
 
@@ -464,12 +465,14 @@ export default defineComponent({
       if (!this.isAtLeastOneSelected) {
         alertInstance(
           3000,
-          "É necessário informar pelo menos um perfil",
+          "É necessário informar pelo menos um perfil.",
           "info"
         );
         const element = document.getElementById("content");
 
-        console.log(element.scroll({ top: 0, behavior: "smooth" }));
+        element.scroll({ top: 0, behavior: "smooth" })
+        return
+
       }
 
       let loader = this.$loading.show();
@@ -521,12 +524,21 @@ export default defineComponent({
           );
         })
         .catch((err) => {
-          alertInstance(
-            "3000",
-            "Ocorreu um erro ao salvar o profissional.",
-            "error"
-          );
-          console.log(err);
+          if (axios.isAxiosError(err)){
+
+            alertInstance(
+              "3000",
+              err.response.data.message,
+              "error"
+            );
+          }else{
+
+            alertInstance(
+              "3000",
+              "Ocorreu um erro ao salvar o profissional.",
+              "error"
+            );
+          }
         })
         .finally(() => {
           loader.hide();

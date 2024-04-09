@@ -21,18 +21,18 @@ const router = createRouter({
 			path: '/profissional',
 			name: 'profissional',
 			component: () => import('../views/Profissional.vue'),
-			meta: { requiresAuth: true, showSidebar: true }
+			meta: { requiresAuth: true, showSidebar: true, perfil: '002' }
 		},
 		{
 			path: '/administracao',
 			component: () => import('../views/Administracao.vue'),
-			meta: { requiresAuth: true, showSidebar: true }
+			meta: { requiresAuth: true, showSidebar: true, perfil: '003' }
 		},
 		{
 			path: '/recepcao',
 			name: 'recepcao',
 			component: () => import('../views/Recepcao.vue'),
-			meta: { requiresAuth: true, showSidebar: true }
+			meta: { requiresAuth: true, showSidebar: true, perfil: '001' }
 		},
 		{
 			path: '/anamnese',
@@ -52,6 +52,12 @@ const router = createRouter({
 			component: () => import('../views/AlterarSenha.vue'),
 			meta: { requiresAuth: false, showSidebar: false }
 		},
+		{
+			path: '/not_permission',
+			name: 'not_permission',
+			component: () => import('../views/SemPermissao.vue'),
+			meta: { requiresAuth: false, showSidebar: false }
+		},
 
 	],
 })
@@ -68,12 +74,14 @@ router.beforeEach(async (to, from, next) => {
 	if (isAuth && to.name === 'login')
 		return next({ name: 'recepcao' })
 
-	console.log(authStore.user)
 
 	if (to.meta?.requiresAuth) {
 		if (isAuth) {
 			if (authStore.user.senha_padrao)
 				return next({ name: 'alterar_senha' })
+
+			if (!authStore.user.perfis.includes(to.meta?.perfil))
+				return next({name: 'not_permission'})
 
 			return next()
 		}

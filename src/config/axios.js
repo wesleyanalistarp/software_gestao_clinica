@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+// Definindo a URL base da API
+const API_URL = import.meta.env.VITE_API_HOST;
+
 const axiosInstance = axios.create({
-  baseURL: 'http://192.168.0.151:8000',
+  baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json'
   }

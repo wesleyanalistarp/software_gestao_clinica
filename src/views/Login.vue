@@ -75,6 +75,7 @@ import { defineComponent } from "vue";
 import { alertInstance } from "../config/alerts";
 import { useAuthStore } from "../stores/AuthStore";
 import axiosInstance from "../config/axios";
+import { redirectPattern } from "../utils/redirect";
 
 const authStore = useAuthStore();
 
@@ -101,7 +102,7 @@ export default defineComponent({
         authStore.setToken(data.token)
         authStore.setUser(data.usuario)
 
-        this.$router.push('recepcao')
+        redirectPattern()
       } catch (err) {
         alertInstance(3000, err.response.data.message, "error");
         this.senha = "";
