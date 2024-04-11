@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2';
+import router from '../router';
 
 export const alertInstance = (duracao, mensagem, icon, redirecionamento = null) => {
   const alert = Swal.mixin({
@@ -13,7 +14,9 @@ export const alertInstance = (duracao, mensagem, icon, redirecionamento = null) 
     },
     willClose: (toast) => {
       if (redirecionamento != null) {
-        window.location = redirecionamento;
+        if (typeof redirecionamento === 'function')
+          return router.push(redirecionamento())
+        router.push(redirecionamento)
       }
     }
   })

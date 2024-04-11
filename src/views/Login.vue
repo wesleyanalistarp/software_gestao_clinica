@@ -98,11 +98,11 @@ export default defineComponent({
           login: this.usuario,
           senha: this.senha,
         });
-        
-        authStore.setToken(data.token)
-        authStore.setUser(data.usuario)
 
-        redirectPattern()
+        authStore.setToken(data.token);
+        authStore.setUser(data.usuario);
+
+        this.$router.push( 'recepcao' );
       } catch (err) {
         alertInstance(3000, err.response.data.message, "error");
         this.senha = "";

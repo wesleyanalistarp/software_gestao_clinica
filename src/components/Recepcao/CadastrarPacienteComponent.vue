@@ -3,7 +3,7 @@
     <div class="card p-3">
       <div class="card-body">
         <div class="text-center h4">Formulário de Cadastro do Paciente</div>
-        <form @submit.prevent="cadastrarPaciente" ref="formContainer">
+        <form @submit.prevent="submit" ref="formContainer">
           <fieldset class="border rounded-3 h6 p-3">
             <legend class="float-none w-auto px-3 h6">Informações</legend>
             <div class="row">
@@ -14,7 +14,7 @@
                   v-model="form.nome"
                   class="form-control form-control-sm"
                   id="nome"
-                  placeholder="Digite o nome do paciente"
+                  placeholder="Digite o nome"
                   required
                 />
               </div>
@@ -385,14 +385,15 @@
 import { defineComponent } from "vue";
 import { masks } from "../../utils/mascara.js";
 import { alertInstance } from "../../config/alerts.js";
-import api from "../../config/axios.js";
-import axios from "axios";
 import moment from "moment";
 import {
   buscaCep,
   buscaEstados,
   buscaMunicipios,
 } from "../../utils/requests.js";
+import axiosInstance from "../../config/axios.js";
+import { useAuthStore } from "../../stores/AuthStore";
+const useAuth = useAuthStore();
 
 export default defineComponent({
   name: "CadastrarPacienteComponent",
@@ -435,7 +436,7 @@ export default defineComponent({
         this.form[e.target.id]
       );
     },
-    cadastrarPaciente() {
+    submit() {
       let loader = this.$loading.show();
       const data = {
         nome: this.form.nome,
@@ -459,8 +460,12 @@ export default defineComponent({
         filiacao: this.form.filiacao,
       };
 
-      api
-        .post("/paciente/create", data)
+      axiosInstance
+        .post("/paciente/create", data, {
+          headers: {
+            Authorization: `Bearer ${useAuth.token}`
+          }
+        })
         .then((response) => {
           alertInstance(4000, "Paciente Cadastrado com sucesso", "success");
           this.resetform();

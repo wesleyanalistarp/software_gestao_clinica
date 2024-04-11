@@ -97,37 +97,21 @@ export default defineComponent({
           },
         });
 
-        redirectPattern()
+        alertInstance("1000", "Senha alterada com sucesso", "success", redirectPattern);
       } catch (err) {
-        console.log(err)
+        console.log(err);
         this.error_senha = err.response.data.errors;
         alertInstance("3000", "deu ruim", "error");
       }
     },
     verifySenha() {
-      if (this.form.senha.length < 8) {
-        this.passwordSecurity.hasLenght8 = false;
-      } else {
-        this.passwordSecurity.hasLenght8 = true;
-      }
+      this.passwordSecurity.hasLenght8 = this.form.senha.length >= 8;
 
-      if (!/[A-Z]/.test(this.form.senha)) {
-        this.passwordSecurity.hasUpper = false;
-      } else {
-        this.passwordSecurity.hasUpper = true;
-      }
+      this.passwordSecurity.hasUpper = /[A-Z]/.test(this.form.senha);
 
-      if (!/[a-z]/.test(this.form.senha)) {
-        this.passwordSecurity.hasLower = false;
-      } else {
-        this.passwordSecurity.hasLower = true;
-      }
+      this.passwordSecurity.hasLower = /[a-z]/.test(this.form.senha);
 
-      if (!/[0-9]/.test(this.form.senha)) {
-        this.passwordSecurity.hasNumber = false;
-      } else {
-        this.passwordSecurity.hasNumber = true;
-      }
+      this.passwordSecurity.hasNumber = /[0-9]/.test(this.form.senha);
     },
   },
 });

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from "../stores/AuthStore";
 import { verifyAuth } from '../config/auth';
+import { redirectPattern } from '../utils/redirect';
 
 
 const router = createRouter({
@@ -25,6 +26,7 @@ const router = createRouter({
 		},
 		{
 			path: '/administracao',
+			name: 'administracao',
 			component: () => import('../views/Administracao.vue'),
 			meta: { requiresAuth: true, showSidebar: true, perfil: '003' }
 		},
@@ -50,7 +52,19 @@ const router = createRouter({
 			path: '/alterar_senha',
 			name: 'alterar_senha',
 			component: () => import('../views/AlterarSenha.vue'),
-			meta: { requiresAuth: false, showSidebar: false }
+			meta: { requiresAuth: false, showSidebar: false },
+			beforeEnter: (to, from, next) => {
+				console.log('opa2')
+
+				const authStore = useAuthStore()
+
+				if (authStore.user.senha_padrao) {
+					return next()
+				}
+
+
+				return next({name: redirectPattern()})
+			}
 		},
 		{
 			path: '/not_permission',
@@ -58,6 +72,10 @@ const router = createRouter({
 			component: () => import('../views/SemPermissao.vue'),
 			meta: { requiresAuth: false, showSidebar: false }
 		},
+		{
+			path: '/:catchAll(.*)',
+			redirect: '/login'
+		}
 
 	],
 })
@@ -71,8 +89,9 @@ router.beforeEach(async (to, from, next) => {
 		isAuth = await authStore.checkToken();
 	}
 
-	if (isAuth && to.name === 'login')
-		return next({ name: 'recepcao' })
+	if (isAuth && to.name === 'login') {
+		return next({name: redirectPattern()})
+	}
 
 
 	if (to.meta?.requiresAuth) {
@@ -81,12 +100,12 @@ router.beforeEach(async (to, from, next) => {
 				return next({ name: 'alterar_senha' })
 
 			if (!authStore.user.perfis.includes(to.meta?.perfil))
-				return next({name: 'not_permission'})
+				return next({ name: 'not_permission' })
 
 			return next()
 		}
 
-		return next({name: 'login'})
+		return next({ name: 'login' })
 	}
 	return next()
 
