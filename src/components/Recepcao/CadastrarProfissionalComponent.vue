@@ -39,7 +39,7 @@
                   v-model="form.nome"
                   class="form-control form-control-sm"
                   id="nome"
-                  placeholder="Digite o nome do paciente"
+                  placeholder="Digite o nome"
                   required
                 />
               </div>
@@ -82,7 +82,7 @@
                   required
                 />
               </div>
-              <div class="mb-3 mt-2 col-md-4 col-6">
+              <div class="mb-3 mt-2 col-md-3 col-6">
                 <label for="filiacao" class="form-label">Nome da mãe</label>
                 <input
                   type="text"
@@ -93,7 +93,7 @@
                   required
                 />
               </div>
-              <div class="mb-3 mt-2 col-md-4 col-6">
+              <div class="mb-3 mt-2 col-md-3 col-6">
                 <label for="rg" class="form-label">RG</label>
                 <input
                   type="text"
@@ -106,7 +106,7 @@
                   required
                 />
               </div>
-              <div class="mb-3 mt-2 col-md-4 col-6">
+              <div class="mb-3 mt-2 col-md-3 col-6">
                 <label for="sus" class="form-label">CNS</label>
                 <input
                   type="text"
@@ -120,7 +120,38 @@
                 />
               </div>
 
-              <div class="mb-3 mt-2 col-md-2 col-6">
+              <div class="mb-3 mt-2 col-md-3 col-6">
+                <label for="estado_civil" class="form-label">
+                  Estado Civil
+                </label>
+                <select
+                  class="form-select form-select-sm"
+                  id="estado_civil"
+                  v-model="form.estado_civil"
+                  aria-label="Small select example"
+                  required
+                >
+                  <option value="">Selecione</option>
+                  <option value="1">Solteiro(a)</option>
+                  <option value="2">Casado(a)</option>
+                  <option value="3">Divorciado(a)</option>
+                  <option value="4">Viúvo(a)</option>
+                  <option value="5">União Estável</option>
+                </select>
+              </div>
+
+              <div class="mb-3 mt-2 col-md-4 col-6">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control form-control-sm"
+                  id="email"
+                  v-model="form.email"
+                  placeholder="Digite seu email"
+                  required
+                />
+              </div>
+              <div class="mb-3 mt-2 col-md-4 col-6">
                 <label for="estado_civil" class="form-label">
                   UF Naturalidade
                 </label>
@@ -143,7 +174,7 @@
                 </select>
               </div>
 
-              <div class="mb-3 mt-2 col-md-5 col-6">
+              <div class="mb-3 mt-2 col-md-4 col-6">
                 <label for="estado_civil" class="form-label">
                   Naturalidade
                 </label>
@@ -171,25 +202,7 @@
                 </select>
               </div>
 
-              <div class="mb-3 mt-2 col-md-5 col-6">
-                <label for="estado_civil" class="form-label">
-                  Estado Civil
-                </label>
-                <select
-                  class="form-select form-select-sm"
-                  id="estado_civil"
-                  v-model="form.estado_civil"
-                  aria-label="Small select example"
-                  required
-                >
-                  <option value="">Selecione</option>
-                  <option value="1">Solteiro(a)</option>
-                  <option value="2">Casado(a)</option>
-                  <option value="3">Divorciado(a)</option>
-                  <option value="4">Viúvo(a)</option>
-                  <option value="5">União Estável</option>
-                </select>
-              </div>
+              
               <div class="mb-3 mt-2 col-md-4 col-6">
                 <label for="sexo" class="form-label">Sexo</label>
                 <select
@@ -245,7 +258,7 @@
               </div>
 
               <div class="mb-3 mt-2 col-md-6 col-12" v-show="isMedico">
-                <label for="exampleInputEmail1" class="form-label"
+                <label for="select-especialidade" class="form-label"
                   >Especialidade</label
                 >
                 <select
@@ -398,6 +411,7 @@ import {
 } from "../../utils/requests.js";
 import moment from "moment";
 import { useAuthStore } from "../../stores/AuthStore";
+import axios from "axios";
 
 const useAuth = useAuthStore();
 
@@ -406,19 +420,21 @@ export default defineComponent({
   data() {
     return {
       form: {
-        nome: "Kauã",
-        data_nascimento: "2003-10-19",
-        rg: "151341234",
-        escolaridade: "1",
-        cpf: "12312312311",
-        sexo: "M",
-        sus: "12312312312",
-        estado_civil: "1",
-        raca_cor: "1",
+        nome: "",
+        data_nascimento: "",
+        rg: "",
+        escolaridade: "",
+        cpf: "",
+        sexo: "",
+        sus: "",
+        estado_civil: "",
+        raca_cor: "",
         naturalidade: "",
-        filiacao: "Mãe",
+        filiacao: "",
 
-        celular: "12122121212",
+        email: "",
+
+        celular: "",
 
         crm: "",
         cbo: "",
@@ -464,12 +480,14 @@ export default defineComponent({
       if (!this.isAtLeastOneSelected) {
         alertInstance(
           3000,
-          "É necessário informar pelo menos um perfil",
+          "É necessário informar pelo menos um perfil.",
           "info"
         );
         const element = document.getElementById("content");
 
-        console.log(element.scroll({ top: 0, behavior: "smooth" }));
+        element.scroll({ top: 0, behavior: "smooth" })
+        return
+
       }
 
       let loader = this.$loading.show();
@@ -497,6 +515,7 @@ export default defineComponent({
         especialidade: this.form.especialidade,
         crm: this.form.crm,
         cbo: this.form.cbo,
+        email: this.form.email
       };
 
       axiosInstance
@@ -521,12 +540,21 @@ export default defineComponent({
           );
         })
         .catch((err) => {
-          alertInstance(
-            "3000",
-            "Ocorreu um erro ao salvar o profissional.",
-            "error"
-          );
-          console.log(err);
+          if (axios.isAxiosError(err)){
+
+            alertInstance(
+              "3000",
+              err.response.data.message,
+              "error"
+            );
+          }else{
+
+            alertInstance(
+              "3000",
+              "Ocorreu um erro ao salvar o profissional.",
+              "error"
+            );
+          }
         })
         .finally(() => {
           loader.hide();

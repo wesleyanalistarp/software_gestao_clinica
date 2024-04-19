@@ -9,17 +9,12 @@ export const redirectPattern = function () {
 
     switch (useAuth.user.perfis[0]) {
         case '001':
-            router.push('recepcao')
-            break;
+            return 'recepcao'
         case '002':
-            router.push('profissional')
-            break;
+            return 'profissional'
         case '003':
-            router.push('administracao')
-            break;
+            return 'administracao'
         default:
-            router.push('home')
-            break;
-
+            return 'home'
     }
 }
