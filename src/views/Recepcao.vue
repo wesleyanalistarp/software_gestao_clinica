@@ -10,18 +10,6 @@
           Cadastrar Paciente
         </button>
         <button type="button" class="btn btn-outline-success border 1px solid botoes"
-          :class="{ 'active': tabAtual == 'CadastrarProfissionalComponent' }"
-          @click="tabAtual = 'CadastrarProfissionalComponent'" style="height: 70px; width: 130px; margin: 5px">
-          <i class="fa-solid fa-user-doctor"></i>
-          Cadastrar Profissional
-        </button>
-        <button type="button" class="btn btn-outline-success border 1px solid botoes"
-          :class="{ 'active': tabAtual == 'CadastrarConsultorioComponent' }"
-          @click="tabAtual = 'CadastrarConsultorioComponent'" style="height: 70px; width: 130px; margin: 5px">
-          <i class="fa-solid fa-plus"></i>
-          Cadastrar Consultório
-        </button>
-        <button type="button" class="btn btn-outline-success border 1px solid botoes"
           :class="{ 'active': tabAtual == 'AgendaComponent' }" @click="tabAtual = 'AgendaComponent'"
           style="height: 70px; width: 110px; margin: 5px">
           <i class="bi bi-calendar2-day"></i>
@@ -68,8 +56,6 @@
 <script setup>
 import Sidebar from "../components/Sidebar.vue";
 import CadastrarPacienteComponent from "../components/Recepcao/CadastrarPacienteComponent.vue";
-import CadastrarProfissionalComponent from "../components/Recepcao/CadastrarProfissionalComponent.vue";
-import CadastrarConsultorioComponent from "../components/Recepcao/CadastrarConsultorioComponent.vue";
 import FormularioFichaComponent from "../components/Recepcao/FormularioFichaComponent.vue";
 import AgendaComponent from "../components/Recepcao/AgendaComponent.vue";
 import EditarComponent from "../components/Recepcao/EditarComponent.vue";
@@ -83,8 +69,6 @@ const tabAtual = shallowRef("CadastrarPacienteComponent");
 
 const tabs = {
   CadastrarPacienteComponent,
-  CadastrarProfissionalComponent,
-  CadastrarConsultorioComponent,
   FormularioFichaComponent,
   AgendaComponent,
   EditarComponent,
@@ -145,4 +129,4 @@ const tabs = {
   padding-top: 20px;
   position: relative;
 } */
-</style>../components/Recepcao/CadastrarConsultorioComponent.vue
+</style>

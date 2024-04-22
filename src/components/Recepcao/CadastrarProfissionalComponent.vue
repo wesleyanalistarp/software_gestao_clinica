@@ -387,7 +387,7 @@
             <button
               type="submit"
               class="btn btn-outline-success"
-              style="height: 40px; width: 120px; margin: 10px"
+              style="height: 40px; width: 1150px; margin: 10px"
             >
               Cadastrar
             </button>

@@ -99,7 +99,7 @@ router.beforeEach(async (to, from, next) => {
 			if (authStore.user.senha_padrao)
 				return next({ name: 'alterar_senha' })
 
-			if (!authStore.user.perfis.includes(to.meta?.perfil))
+			if (!authStore.user.perfis.includes(to.meta?.perfil) && !authStore.user.administrador)
 				return next({ name: 'not_permission' })
 
 			return next()
