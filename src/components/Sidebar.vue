@@ -16,15 +16,15 @@
 				<i class="fa-solid fa-vial-virus material-icons"></i>
 				<span class="text">LABORATÓRIO</span>
 			</router-link>
-			<router-link to="/recepcao" class="button" v-if="perfis.includes('001')">
+			<router-link to="/recepcao" class="button" v-if="perfis.includes('001') || isAdmin">
 				<i class="bi bi-person-workspace material-icons"></i>
 				<span class="text">RECEPÇÃO</span>
 			</router-link>
-			<router-link to="/profissional" class="button" v-if="perfis.includes('002')">
+			<router-link to="/profissional" class="button" v-if="perfis.includes('002') || isAdmin">
 				<span class="fa-solid fa-user-doctor material-icons"></span>
 				<span class="text">PROFISSIONAL</span>
 			</router-link>
-			<router-link to="/administracao" class="button" v-if="perfis.includes('003')">
+			<router-link to="/administracao" class="button" v-if="perfis.includes('003') || isAdmin">
 				<span class="fa-solid fa-sitemap material-icons"></span>
 				<span class="text">ADMINISTRAÇÃO</span>
 			</router-link>
@@ -53,6 +53,8 @@ import { useAuthStore } from '../stores/AuthStore';
 const useAuth = useAuthStore();
 
 const perfis = ref(useAuth.user.perfis)
+
+const isAdmin = ref(useAuth.user.administrador)
 
 const emit = defineEmits();
 
