@@ -108,7 +108,7 @@ export default defineComponent({
         })
         .catch((error) => {
           console.log("deu ruim");
-          console.log(err);
+          console.log(error);
         })
         .finally(() => {
           loader.hide();
