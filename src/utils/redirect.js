@@ -5,7 +5,6 @@ export const redirectPattern = function () {
 
     const useAuth = useAuthStore()
 
-    console.log(router)
 
     switch (useAuth.user.perfis[0]) {
         case '001':
@@ -14,7 +13,9 @@ export const redirectPattern = function () {
             return 'profissional'
         case '003':
             return 'administracao'
-        default:
-            return 'home'
     }
+
+    if (useAuth.user.administrador) return 'recepcao';
+
+    return 'not_permission'
 }

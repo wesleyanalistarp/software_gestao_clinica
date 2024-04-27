@@ -1,54 +1,29 @@
 <template>
-  <div class="mt-2 mb-4">
+  <div class="mt-2">
     <div class="card p-3">
-      <div class="card-body">
-        <div class="mb-3">
-          <div class="text-center h4">Agenda</div>
-          <fieldset class="border rounded-3 h6 p-3">
-            <legend class="float-none w-auto px-3 h6">Consultar agenda</legend>
+      <div class="card mb-3">
+        <div class="input-group mb-3">
+          <span class="input-group-text m-2" id="inputGroup-sizing-default"
+            >Consultar agenda
+            <input
+              type="text"
+              class="form-control m-2"
+              placeholder="Digite o nome do médico "
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+          /></span>
 
-            <div class="row">
-              <div class="col-md-12">
-                <label for="select_profissional" class="form-label"
-                  >Buscar por:</label
-                >
-              </div>
-              <div class="col-md-12">
-                <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="inlineRadioOptions"
-                    id="inlineRadio1"
-                    value="option1"
-                  />
-                  <label class="form-check-label" for="inlineRadio1"
-                    >Profissional</label
-                  >
-                </div>
-                <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="inlineRadioOptions"
-                    id="inlineRadio2"
-                    value="option2"
-                  />
-                  <label class="form-check-label" for="inlineRadio2"
-                    >Especialidade</label
-                  >
-                </div>
-              </div>
-              <div class="form-group col-md-6">
-                <Select2Component id="select_profissional">
-                  <option value="1">opa1</option>
-                  <option value="2">opa2</option>
-                  <option value="3">opa3</option>
-                </Select2Component>
-              </div>
-            </div>
-            <button class="btn btn-outline-success my-2">Buscar agenda</button>
-          </fieldset>
+          <select class="form-select font-size-sm m-2" style="width: 190px">
+            <option selected>Buscar agenda por Especialidade</option>
+            <option value="1">Puxar do banco</option>
+          </select>
+          <button
+            type="button"
+            class="btn btn-outline-success btn-sm mt-2"
+            style="height: 68px"
+          >
+            Buscar agenda
+          </button>
         </div>
         <div class="button">
           <button
@@ -107,6 +82,9 @@
               ></button>
             </div>
             <div class="modal-body">
+              <div class="input-group mb-3">
+                <Combobox :load-options="loadUsers" v-model="loadUser" />
+              </div>
               <div class="texto">
                 Selecione a data:
                 <input type="date" />
@@ -282,14 +260,7 @@
       <div class="card-body">
         <div class="text-center h4">Agenda</div>
         <div class="demo-app">
-          <div class="demo-app-main">
-            <FullCalendar class="demo-app-calendar" :options="calendarOptions">
-              <template v-slot:eventContent="arg">
-                <b>{{ arg.timeText }}</b>
-                <i>{{ arg.event.title }}</i>
-              </template>
-            </FullCalendar>
-          </div>
+          <div class="demo-app-main"></div>
         </div>
       </div>
     </div>
@@ -298,106 +269,32 @@
 
 <script setup>
 import { ref } from "vue";
-import Select2Component from "../Select2Component.vue";
-import FullCalendar from "@fullcalendar/vue3";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
-import ptBrLocale from "@fullcalendar/core/locales/pt-br";
-import moment from "moment";
+import Combobox from "../Combobox.vue";
+import axiosInstance from "../../config/axios";
+import { useAuthStore } from "../../stores/AuthStore";
+const useAuth = useAuthStore();
 
-const calendarOptions = ref({
-  locale: ptBrLocale,
-  plugins: [
-    dayGridPlugin,
-    timeGridPlugin,
-    interactionPlugin, // needed for dateClick
-  ],
-  headerToolbar: {
-    left: "prev,next today",
-    center: "title",
-    right: "dayGridMonth,timeGridWeek,timeGridDay",
-  },
-  initialView: "timeGridWeek",
-  initialEvents: [
-    {
-      groupId: 'agenda',
-      start: '2024-04-25T10:00:00',
-      end: '2024-04-25T16:00:00',
-      display: 'background',
-      color: 'green'
-    },
-    {
-      groupId: 'agenda',
-      start: '2024-04-24T07:00:00',
-      end: '2024-04-24T12:00:00',
-      display: 'background',
-      color: 'green'
-    },
-  ], // alternatively, use the `events` setting to fetch from a feed
-  editable: true,
-  selectable: true,
-  selectMirror: true,
-  dayMaxEvents: true,
-  weekends: true,
-  select: handleDateSelect,
-  eventClick: handleEventClick,
-  eventsSet: handleEvents,
-  eventResize: handleEventResize
-});
+const loadUser = ref();
 
-
-function handleDateSelect(selectInfo) {
-  let calendarApi = selectInfo.view.calendar;
-  calendarApi.unselect(); // clear date selection
-
-  // Obter todos os eventos
-  let allEvents = calendarApi.getEvents();
-
-  // Filtrar eventos com groupId igual a 'agenda'
-  let agendaEvents = allEvents.filter(event => event.groupId === 'agenda');
-
-  var isPermition = false
-  agendaEvents.forEach(event => {
-
-    if (
-      moment(selectInfo.start).isBetween(event.start, event.end, undefined, '[]') &&
-      moment(selectInfo.end).isBetween(event.start, event.end, undefined, '[]')
-    ) {
-      isPermition = true
-    }
-  });
-
-
-  if (isPermition) {
-    let title = prompt("Agendar paciente");
-    if (title) {
-      calendarApi.addEvent({
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay,
-      });
-    }
-  } else {
-    alert('Seleção fora do período permitido.');
-  }
-}
-function handleEventClick(clickInfo) {
-  if (
-    confirm(
-      `Are you sure you want to delete the event '${clickInfo.event.title}'`
-    )
-  ) {
-    clickInfo.event.remove();
-  }
-}
-function handleEventResize(info) {
-  console.log(moment(info.event.start).format("YYYY-MM-DD HH:MM"));
-  console.log(moment(info.event.end).format("YYYY-MM-DD HH:MM"));
-}
-function handleEvents(events) {
-  this.currentEvents = events;
+function loadUsers(query, setOptions) {
+  axiosInstance
+    .get(`/profissional/findByNome/${query}`, {
+      headers: {
+        Authorization: `Bearer ${useAuth.token}`,
+      },
+    })
+    .then((response) => response.data.profissionais)
+    .then((results) => {
+      setOptions(
+        results.map((profissional) => {
+          return {
+            value: profissional.id,
+            label: profissional.nome,
+          };
+        })
+      );
+    })
+    ;
 }
 </script>
 
@@ -426,13 +323,5 @@ function handleEvents(events) {
 
 .time {
   margin: 5px;
-}
-
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
 }
 </style>
