@@ -18,11 +18,11 @@
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="inlineRadioOptions"
-                    id="inlineRadio1"
-                    value="option1"
+                    v-model="buscarPor"
+                    id="radio_profissional"
+                    value="1"
                   />
-                  <label class="form-check-label" for="inlineRadio1"
+                  <label class="form-check-label" for="radio_profissional"
                     >Profissional</label
                   >
                 </div>
@@ -30,20 +30,18 @@
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="inlineRadioOptions"
-                    id="inlineRadio2"
-                    value="option2"
+                    v-model="buscarPor"
+                    id="radio_especialidade"
+                    value="2"
                   />
-                  <label class="form-check-label" for="inlineRadio2"
+                  <label class="form-check-label" for="radio_especialidade"
                     >Especialidade</label
                   >
                 </div>
               </div>
               <div class="form-group col-md-6">
                 <Select2Component id="select_profissional">
-                  <option value="1">opa1</option>
-                  <option value="2">opa2</option>
-                  <option value="3">opa3</option>
+                  <option v-for="(busca, index) in buscaProfissionalEspecialidade" :key="index" :value="'opa'">{{ busca.nome }}</option>
                 </Select2Component>
               </div>
             </div>
@@ -297,7 +295,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import Select2Component from "../Select2Component.vue";
 import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -305,7 +303,44 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import ptBrLocale from "@fullcalendar/core/locales/pt-br";
 import moment from "moment";
+import { alertInstance, alertModal } from "../../config/alerts";
+import axiosInstance from "../../config/axios";
+import { useAuthStore } from "../../stores/AuthStore";
 
+const useAuth = useAuthStore();
+
+onMounted(() => {
+  getBuscaProfissionalEspecialidade(buscarPor.value)
+})
+
+// BUSCAR PROFISSIONAIS OU ESPECIALIDADES PARA FAZER O FILTRO
+const buscarPor = ref('1');
+const buscaProfissionalEspecialidade = ref([])
+async function getBuscaProfissionalEspecialidade(buscaPor) {
+  try {
+    if (buscaPor == 1) {
+
+      let response = await axiosInstance.get('/profissional/findByPerfil/002', {
+        headers: {
+          Authorization: `Bearer ${useAuth.token}`,
+        },
+      })
+      buscaProfissionalEspecialidade.value = response.data.profissionais
+    } else if (buscaPor == 2) {
+      let response = await axiosInstance.get('/profissional/findByPerfil/002', {
+        headers: {
+          Authorization: `Bearer ${useAuth.token}`,
+        },
+      })
+      buscaProfissionalEspecialidade.value = response.data.profissionais
+    }
+  }catch(err) {
+    alertInstance(3000, err.response.data.message, 'error')
+  }
+}
+
+
+// CALENDÁRIO
 const calendarOptions = ref({
   locale: ptBrLocale,
   plugins: [
@@ -329,8 +364,8 @@ const calendarOptions = ref({
     },
     {
       groupId: 'agenda',
-      start: '2024-04-24T07:00:00',
-      end: '2024-04-24T12:00:00',
+      start: '2024-04-27T07:00:00',
+      end: '2024-04-27T12:00:00',
       display: 'background',
       color: 'green'
     },
@@ -345,8 +380,6 @@ const calendarOptions = ref({
   eventsSet: handleEvents,
   eventResize: handleEventResize
 });
-
-
 function handleDateSelect(selectInfo) {
   let calendarApi = selectInfo.view.calendar;
   calendarApi.unselect(); // clear date selection
@@ -380,7 +413,7 @@ function handleDateSelect(selectInfo) {
       });
     }
   } else {
-    alert('Seleção fora do período permitido.');
+    alertModal('Atenção', 'Não é possível agendar consulta nesse período', 'error')
   }
 }
 function handleEventClick(clickInfo) {
@@ -399,6 +432,7 @@ function handleEventResize(info) {
 function handleEvents(events) {
   this.currentEvents = events;
 }
+
 </script>
 
 <style>
