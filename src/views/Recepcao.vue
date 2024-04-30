@@ -65,7 +65,8 @@ import ReceitaComponent from "../components/Recepcao/ReceitaComponent.vue";
 import ProcedimentosComponent from "../components/Recepcao/ProcedimentosComponent.vue";
 import { shallowRef } from "vue";
 
-const tabAtual = shallowRef("CadastrarPacienteComponent");
+//const tabAtual = shallowRef("CadastrarPacienteComponent");
+const tabAtual = shallowRef("AgendaComponent");
 
 const tabs = {
   CadastrarPacienteComponent,

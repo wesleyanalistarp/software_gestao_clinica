@@ -9,100 +9,56 @@
 
             <div class="row">
               <div class="col-md-12">
-                <label for="select_profissional" class="form-label"
-                  >Buscar por:</label
-                >
+                <label class="form-label">Buscar por:</label>
               </div>
               <div class="col-md-12">
                 <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    v-model="buscarPor"
-                    id="radio_profissional"
-                    value="1"
-                  />
-                  <label class="form-check-label" for="radio_profissional"
-                    >Profissional</label
-                  >
+                  <input class="form-check-input" type="radio" v-model="buscarPor"
+                    @change="getBuscaProfissionalEspecialidade" id="radio_profissional" value="1" />
+                  <label class="form-check-label" for="radio_profissional">Profissional</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    v-model="buscarPor"
-                    id="radio_especialidade"
-                    value="2"
-                  />
-                  <label class="form-check-label" for="radio_especialidade"
-                    >Especialidade</label
-                  >
+                  <input class="form-check-input" type="radio" v-model="buscarPor"
+                    @change="getBuscaProfissionalEspecialidade" id="radio_especialidade" value="2" />
+                  <label class="form-check-label" for="radio_especialidade">Especialidade</label>
                 </div>
               </div>
               <div class="form-group col-md-6">
-                <Select2Component id="select_profissional">
-                  <option v-for="(busca, index) in buscaProfissionalEspecialidade" :key="index" :value="'opa'">{{ busca.nome }}</option>
-                </Select2Component>
+                <Select2Component v-model="selectbuscaProfissionalEspecialidade"
+                  :options="buscaProfissionalEspecialidade" />
               </div>
             </div>
-            <button class="btn btn-outline-success my-2">Buscar agenda</button>
+            <button class="btn btn-outline-success my-2" @click="getAgenda">Buscar agenda</button>
           </fieldset>
         </div>
         <div class="button">
-          <button
-            type="submit"
-            class="btn btn-outline-success"
-            data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop"
-            style="height: 40px; width: 199px; margin: 10px"
-          >
+          <button type="submit" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+            style="height: 40px; width: 199px; margin: 10px">
             <i class="fa-solid fa-plus"></i>
             Criar agenda médico
           </button>
-          <button
-            type="submit"
-            class="btn btn-outline-success"
-            data-bs-toggle="modal"
-            data-bs-target="#agendamento_paciente"
-            style="height: 40px; width: 270px; margin: 10px"
-          >
+          <button type="submit" class="btn btn-outline-success" data-bs-toggle="modal"
+            data-bs-target="#agendamento_paciente" style="height: 40px; width: 270px; margin: 10px">
             <i class="fa-solid fa-eye"></i>
             Agendamento do paciente
           </button>
-          <button
-            type="submit"
-            class="btn btn-outline-success"
-            data-bs-toggle="modal"
-            data-bs-target="#lista_especialidade"
-            style="height: 40px; width: 290px; margin: 10px"
-          >
+          <button type="submit" class="btn btn-outline-success" data-bs-toggle="modal"
+            data-bs-target="#lista_especialidade" style="height: 40px; width: 290px; margin: 10px">
             <i class="fa-solid fa-magnifying-glass"></i>
             Consultar lista por especialidade
           </button>
         </div>
       </div>
       <!--Inicio do modal para criar a agenda médica-->
-      <div
-        class="modal fade"
-        id="staticBackdrop"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabindex="-1"
-        aria-labelledby="staticBackdropLabel"
-        aria-hidden="true"
-      >
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="staticBackdropLabel">
                 Criar agenda médica
               </h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="texto">
@@ -113,34 +69,20 @@
                 <p class="subscribe">
                   Das <input type="time" /> as <input type="time" />
                   <a href="#">
-                    <button
-                      class="btn btn-outline-success btn-sm"
-                      type="button"
-                      id="button-addon2"
-                    >
+                    <button class="btn btn-outline-success btn-sm" type="button" id="button-addon2">
                       <i class="fa-solid fa-plus"></i> Adicionar
-                    </button></a
-                  >
+                    </button></a>
                 </p>
               </div>
               <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="flexCheckIndeterminate"
-                />
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate" />
                 <label class="form-check-label" for="flexCheckIndeterminate">
                   Atenderá todos os dias da semana horário comércial
                 </label>
               </div>
             </div>
             <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-success"
-                data-bs-dismiss="modal"
-              >
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal">
                 Criar agenda
               </button>
             </div>
@@ -150,52 +92,27 @@
       <!--fim do modal para criar a agenda médica-->
       <!--**************************************************************************************************-->
       <!--Inicio do modal para consultar a agenda do paciente-->
-      <div
-        class="modal fade"
-        id="agendamento_paciente"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabindex="-1"
-        aria-labelledby="staticBackdropLabel"
-        aria-hidden="true"
-      >
+      <div class="modal fade" id="agendamento_paciente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="staticBackdropLabel">
                 Consultar agendamento do paciente
               </h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="input-group mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Digite o nome do paciente"
-                  aria-label="Recipient's username"
-                  aria-describedby="button-addon2"
-                />
-                <button
-                  class="btn btn-outline-success"
-                  type="button"
-                  id="button-addon2"
-                >
+                <input type="text" class="form-control" placeholder="Digite o nome do paciente"
+                  aria-label="Recipient's username" aria-describedby="button-addon2" />
+                <button class="btn btn-outline-success" type="button" id="button-addon2">
                   <i class="fa-solid fa-magnifying-glass"></i> Localizar
                 </button>
               </div>
             </div>
             <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-success"
-                data-bs-dismiss="modal"
-              >
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal">
                 Confirmar
               </button>
             </div>
@@ -205,27 +122,15 @@
       <!--fim do modal para consultar a agenda do paciente-->
       <!--*******************************************************************************-->
       <!--inicio do modal para consultar a lista de frequência por especialidade-->
-      <div
-        class="modal fade"
-        id="lista_especialidade"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabindex="-1"
-        aria-labelledby="staticBackdropLabel"
-        aria-hidden="true"
-      >
+      <div class="modal fade" id="lista_especialidade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="staticBackdropLabel">
                 Consultar lista de paciente por especialidade
               </h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <select class="form-select font-size-sm m-2 col-12">
@@ -264,11 +169,7 @@
               </table>
             </div>
             <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-success"
-                data-bs-dismiss="modal"
-              >
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal">
                 Imprimir lista
               </button>
             </div>
@@ -313,32 +214,6 @@ onMounted(() => {
   getBuscaProfissionalEspecialidade(buscarPor.value)
 })
 
-// BUSCAR PROFISSIONAIS OU ESPECIALIDADES PARA FAZER O FILTRO
-const buscarPor = ref('1');
-const buscaProfissionalEspecialidade = ref([])
-async function getBuscaProfissionalEspecialidade(buscaPor) {
-  try {
-    if (buscaPor == 1) {
-
-      let response = await axiosInstance.get('/profissional/findByPerfil/002', {
-        headers: {
-          Authorization: `Bearer ${useAuth.token}`,
-        },
-      })
-      buscaProfissionalEspecialidade.value = response.data.profissionais
-    } else if (buscaPor == 2) {
-      let response = await axiosInstance.get('/profissional/findByPerfil/002', {
-        headers: {
-          Authorization: `Bearer ${useAuth.token}`,
-        },
-      })
-      buscaProfissionalEspecialidade.value = response.data.profissionais
-    }
-  }catch(err) {
-    alertInstance(3000, err.response.data.message, 'error')
-  }
-}
-
 
 // CALENDÁRIO
 const calendarOptions = ref({
@@ -353,23 +228,16 @@ const calendarOptions = ref({
     center: "title",
     right: "dayGridMonth,timeGridWeek,timeGridDay",
   },
+  events: [
+    {
+      groupId: 'agenda',
+      id: '1',
+      title: 'opa',
+      start: '2024-04-29',
+      end: '2024-04-30'
+    }
+  ],
   initialView: "timeGridWeek",
-  initialEvents: [
-    {
-      groupId: 'agenda',
-      start: '2024-04-25T10:00:00',
-      end: '2024-04-25T16:00:00',
-      display: 'background',
-      color: 'green'
-    },
-    {
-      groupId: 'agenda',
-      start: '2024-04-27T07:00:00',
-      end: '2024-04-27T12:00:00',
-      display: 'background',
-      color: 'green'
-    },
-  ], // alternatively, use the `events` setting to fetch from a feed
   editable: true,
   selectable: true,
   selectMirror: true,
@@ -431,6 +299,91 @@ function handleEventResize(info) {
 }
 function handleEvents(events) {
   this.currentEvents = events;
+}
+
+// BUSCAR PROFISSIONAIS OU ESPECIALIDADES PARA FAZER O FILTRO
+const buscarPor = ref('1');
+const buscaProfissionalEspecialidade = ref([])
+const selectbuscaProfissionalEspecialidade = ref(null)
+async function getBuscaProfissionalEspecialidade() {
+  try {
+    if (buscarPor.value == 1) { // busca por profissional
+
+      let response = await axiosInstance.get('/profissional/findByPerfil/002', {
+        headers: {
+          Authorization: `Bearer ${useAuth.token}`,
+        },
+      })
+      buscaProfissionalEspecialidade.value = response.data.profissionais.map(value => {
+        return {
+          id: value.id,
+          text: value.nome
+        }
+      })
+      if (buscaProfissionalEspecialidade.value.length > 0) {
+        selectbuscaProfissionalEspecialidade.value = buscaProfissionalEspecialidade.value[0].id
+      }
+    } else if (buscarPor.value == 2) { // busca por especialidade
+      let response = await axiosInstance.get('/especialidade/findInUse', {
+        headers: {
+          Authorization: `Bearer ${useAuth.token}`,
+        },
+      })
+      buscaProfissionalEspecialidade.value = response.data.especialidades.map(value => {
+        return {
+          id: value.id,
+          text: value.nome
+        }
+      })
+      if (buscaProfissionalEspecialidade.value.length > 0) {
+        selectbuscaProfissionalEspecialidade.value = buscaProfissionalEspecialidade.value[0].id
+      }
+    }
+  } catch (err) {
+    alertInstance(3000, err.response.data.message, 'error')
+  }
+}
+
+async function getAgenda() {
+
+  if (selectbuscaProfissionalEspecialidade.value) {
+    try {
+
+      if (buscarPor.value == 1) {
+        var response = await axiosInstance.get(`/agendamento/profissional/findById/${selectbuscaProfissionalEspecialidade.value}`, {
+          headers: {
+            Authorization: `Bearer ${useAuth.token}`,
+          },
+        });
+      }
+
+      let eventsFilter = calendarOptions.value.events.filter(event => event.groupId != 'agenda');
+
+      let newEvents = response.data.map(event => {
+        return {
+          groupId: 'agenda',
+          id: event.id,
+          start: event.data_inicio,
+          end: event.data_fim,
+          title: event.descricao,
+          display: 'background',
+          color: 'green'
+        }
+      })
+    
+
+
+      calendarOptions.value.events = [...eventsFilter, ...newEvents]
+
+
+    } catch (err) {
+      console.log(err)
+
+      alertInstance(3000, 'Ocorreu um erro', 'error')
+
+    }
+  }
+
 }
 
 </script>
