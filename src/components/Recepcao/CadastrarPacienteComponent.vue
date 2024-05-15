@@ -463,8 +463,8 @@ export default defineComponent({
       axiosInstance
         .post("/paciente/create", data, {
           headers: {
-            Authorization: `Bearer ${useAuth.token}`
-          }
+            Authorization: `Bearer ${useAuth.token}`,
+          },
         })
         .then((response) => {
           alertInstance(4000, "Paciente Cadastrado com sucesso", "success");
