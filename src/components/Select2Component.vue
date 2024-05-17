@@ -1,6 +1,6 @@
 <template>
-  <select ref="selectElement" :value="modelValue" class="select2 form-select" @change="onChange">
-    <!-- <option v-for="(option, index) in options" :key="index" :value="option.id">{{ option.nome }}</option> -->
+  <select ref="selectElement" :value="selectedValue" class="select2 form-select" @change="onChange">
+    <option v-for="(option, index) in options" :key="index" :value="option.id">{{ option.text }}</option>
   </select>
 </template>
 
@@ -8,11 +8,14 @@
 import $ from "jquery";
 import select2 from "select2";
 import "select2/dist/css/select2.min.css";
-import { ref, defineProps, watch, defineEmits } from "vue";
+import { ref, defineProps, watch, defineEmits, toRef } from "vue";
 
 //props
 const props = defineProps({
-  modelValue: [String, Number],
+  modelValue: {
+    type: [String, Number],
+    default: null,
+  },
   options: {
     type: Array,
     required: true,
@@ -27,25 +30,37 @@ watch(
 
 select2();
 const selectElement = ref(null);
+
 function alterarOptions(newOption, oldOption) {
 
 
-  if ($(selectElement.value).hasClass("select2-hidden-accessible")) {
-    $(selectElement.value).select2('destroy');
-    $(selectElement.value).empty();
-  }
+  // if ($(selectElement.value).hasClass("select2-hidden-accessible")) {
+  //   $(selectElement.value).select2('destroy');
+  //   $(selectElement.value).empty();
+  // }
 
 
-  $(selectElement.value).select2({
-    placeholder: "Selecione",
-    data: newOption
-  });
+  // $(selectElement.value).select2({
+  //   placeholder: "Selecione",
+  //   data: newOption
+  // });
 
 }
 
 const emit = defineEmits(['update:modelValue']);
+
+const selectedValue = ref(props.modelValue);
+watch(
+  toRef(props, 'modelValue'),
+  (newValue) => {
+    selectedValue.value = newValue;
+  }
+);
 const onChange = (event) => {
-  emit('update:modelValue', event.target.value); // emite o valor selecionado
+  console.log(selectedValue.value)
+  const value = event.target.value;
+  selectedValue.value = value;
+  emit('update:modelValue', value);
 };
 
 

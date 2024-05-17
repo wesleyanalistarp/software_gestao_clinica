@@ -52,7 +52,7 @@ const router = createRouter({
 			path: '/alterar_senha',
 			name: 'alterar_senha',
 			component: () => import('../views/AlterarSenha.vue'),
-			meta: { requiresAuth: false, showSidebar: false },
+			meta: { requiresAuth: true, showSidebar: false },
 			beforeEnter: (to, from, next) => {
 				console.log('opa2')
 
@@ -96,7 +96,8 @@ router.beforeEach(async (to, from, next) => {
 
 	if (to.meta?.requiresAuth) {
 		if (isAuth) {
-			if (authStore.user.senha_padrao)
+
+			if (authStore.user.senha_padrao && to.name !== 'alterar_senha')
 				return next({ name: 'alterar_senha' })
 
 			if (!authStore.user.perfis.includes(to.meta?.perfil) && !authStore.user.administrador)
