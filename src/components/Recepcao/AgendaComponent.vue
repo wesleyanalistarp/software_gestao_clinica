@@ -228,15 +228,7 @@ const calendarOptions = ref({
     center: "title",
     right: "dayGridMonth,timeGridWeek,timeGridDay",
   },
-  events: [
-    {
-      groupId: 'agenda',
-      id: '1',
-      title: 'opa',
-      start: '2024-04-29',
-      end: '2024-04-30'
-    }
-  ],
+  events: [],
   initialView: "timeGridWeek",
   editable: true,
   selectable: true,
@@ -351,6 +343,12 @@ async function getAgenda() {
 
       if (buscarPor.value == 1) {
         var response = await axiosInstance.get(`/agendamento/profissional/findById/${selectbuscaProfissionalEspecialidade.value}`, {
+          headers: {
+            Authorization: `Bearer ${useAuth.token}`,
+          },
+        });
+      } else if (buscarPor.value == 2){
+        var response = await axiosInstance.get(`/agendamento/findByEspecialidade/${selectbuscaProfissionalEspecialidade.value}`, {
           headers: {
             Authorization: `Bearer ${useAuth.token}`,
           },
