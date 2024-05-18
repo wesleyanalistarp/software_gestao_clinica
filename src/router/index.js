@@ -12,12 +12,12 @@ const router = createRouter({
 			component: () => import('../views/Laboratorio.vue'),
 			meta: { requiresAuth: true, showSidebar: true }
 		},
-		{
-			path: '/paciente',
-			name: 'paciente',
-			component: () => import('../views/Paciente.vue'),
-			meta: { requiresAuth: true, showSidebar: true }
-		},
+		// {
+		// 	path: '/paciente',
+		// 	name: 'paciente',
+		// 	component: () => import('../views/Paciente.vue'),
+		// 	meta: { requiresAuth: true, showSidebar: true }
+		// },
 		{
 			path: '/profissional',
 			name: 'profissional',

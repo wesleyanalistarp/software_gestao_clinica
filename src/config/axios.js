@@ -5,7 +5,7 @@ import axios from 'axios';
 const API_URL = import.meta.env.VITE_API_HOST;
 
 const axiosInstance = axios.create({
-  baseURL: 'http://api.clinica.ts:8000',
+  baseURL: 'https://clinica-api-fbqo.onrender.com',
   headers: {
     'Content-Type': 'application/json',
   } 
