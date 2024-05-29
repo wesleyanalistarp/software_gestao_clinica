@@ -575,7 +575,7 @@ export default defineComponent({
     async buscaEspecialidades() {
       try {
         let response = await axiosInstance.get(
-          "/profissional/especialidade/findAll",
+          "/especialidade/findAll",
           {
             headers: {
               Authorization: `Bearer ${useAuth.token}`,

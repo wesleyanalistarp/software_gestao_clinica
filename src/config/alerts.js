@@ -27,7 +27,7 @@ export const alertInstance = (duracao, mensagem, icon, redirecionamento = null) 
 }
 
 export const alertModal = (title, html, icon) => {
-  const alert = Swal.fire({
+  let alert = Swal.fire({
     title,
     html,
     icon

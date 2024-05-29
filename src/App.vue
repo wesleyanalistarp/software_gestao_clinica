@@ -13,16 +13,28 @@ import { defineComponent } from "vue";
 import { useAuthStore } from "./stores/AuthStore";
 import { verifyAuth } from "./config/auth";
 import Sidebar from "./components/Sidebar.vue";
+import axiosInstance from "./config/axios";
+import { getSubDominio } from "./utils/rest";
+import { useSubdomainStore } from "./stores/subDomainStore";
 
 export default defineComponent({
   data() {
     return {
       authStore: useAuthStore(),
+      subdomainStore: useSubdomainStore(),
       is_expanded: (localStorage.getItem("is_expanded") === 'true') && this.showSidebar,
     };
   },
   components: {
     Sidebar,
+  },
+  mounted() {
+    const subdomain = getSubDominio();
+    if (subdomain) {
+      this.subdomainStore.setSubdomain(subdomain);
+    } else {
+      this.subdomainStore.loadSubdomain();
+    }
   },
   methods: {
     funcaoDoPai(is_expanded) {
@@ -85,23 +97,27 @@ button {
 
 /* Personaliza toda a barra de rolagem */
 ::-webkit-scrollbar {
-  width: 7px; /* Largura da barra de rolagem */
+  width: 7px;
+  /* Largura da barra de rolagem */
 }
 
 /* Personaliza o fundo (track) da barra de rolagem */
 ::-webkit-scrollbar-track {
-  background: rgba(165, 165, 165, 0.605); /* Cor de fundo */
+  background: rgba(165, 165, 165, 0.605);
+  /* Cor de fundo */
 }
 
 /* Personaliza o indicador de rolagem (thumb) da barra de rolagem */
 ::-webkit-scrollbar-thumb {
-  background: var(--dark-alt); /* Cor do indicador de rolagem */
+  background: var(--dark-alt);
+  /* Cor do indicador de rolagem */
   border-radius: 5px;
 }
 
 /* Personaliza o indicador de rolagem ao passar o mouse */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Cor do indicador de rolagem ao passar o mouse */
+  background: #555;
+  /* Cor do indicador de rolagem ao passar o mouse */
 }
 
 .app {
