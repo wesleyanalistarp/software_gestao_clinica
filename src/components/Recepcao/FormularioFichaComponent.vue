@@ -24,14 +24,19 @@
                 <label for="exampleInputEmail1" class="form-label"
                   >Paciente</label
                 >
-                <input
-                  type="text"
-                  v-model="form.nome"
-                  class="form-control form-control-sm"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                  placeholder="Nome do paciente"
-                />
+                <select
+                  v-model="selectedPaciente"
+                  class="form-select form-select-sm"
+                  aria-label="Small select example"
+                >
+                  <option
+                    v-for="paciente in pacientesOptions"
+                    :value="paciente.id"
+                    :key="paciente.id"
+                  >
+                    {{ paciente.nome }}
+                  </option>
+                </select>
               </div>
               <div class="card col-2" style="background: #f2f2f2; height: 80px">
                 <div class="form-check form-switch mt-4 text-center fw-bold">
@@ -521,6 +526,9 @@ export default defineComponent({
         sala: "",
       },
 
+      pacientesOptions: [], // Array para armazenar as opções do select
+      selectedPaciente: null,
+
       comorbidadesOptions: [], // Array para armazenar as opções do select
       selectedComorbidade: null,
 
@@ -538,6 +546,7 @@ export default defineComponent({
     };
   },
   mounted() {
+    this.getPacientes();
     this.getComorbidades();
     this.getExames();
     this.getConsultorios();
@@ -545,6 +554,28 @@ export default defineComponent({
     this.getProcedimentos();
   },
   methods: {
+    getPacientes() {
+      axiosInstance
+        .get("/paciente/findAll", {
+          headers: {
+            Authorization: `Bearer ${useAuth.token}`,
+          },
+        })
+        .then((response) => {
+          const pacientes = response.data.pacientes.map((paciente) => {
+            return {
+              id: paciente.id, // Assuma que "id" é a propriedade que identifica a comorbidade
+              nome: paciente.nome, // Assuma que "descricao" é a propriedade do nome da comorbidade
+            };
+          });
+          this.pacientesOptions = pacientes;
+        })
+        .catch((error) => {
+          console.log("deu ruim");
+          console.log(error);
+        });
+    },
+
     getComorbidades() {
       axiosInstance
         .get("/comorbidade/findAll", {
