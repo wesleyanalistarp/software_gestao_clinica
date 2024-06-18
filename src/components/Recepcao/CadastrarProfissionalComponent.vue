@@ -202,7 +202,6 @@
                 </select>
               </div>
 
-              
               <div class="mb-3 mt-2 col-md-4 col-6">
                 <label for="sexo" class="form-label">Sexo</label>
                 <select
@@ -387,7 +386,7 @@
             <button
               type="submit"
               class="btn btn-outline-success"
-              style="height: 40px; width: 1150px; margin: 10px"
+              style="height: 40px; width: 120px; margin: 10px 20px"
             >
               Cadastrar
             </button>
@@ -485,9 +484,8 @@ export default defineComponent({
         );
         const element = document.getElementById("content");
 
-        element.scroll({ top: 0, behavior: "smooth" })
-        return
-
+        element.scroll({ top: 0, behavior: "smooth" });
+        return;
       }
 
       let loader = this.$loading.show();
@@ -515,7 +513,7 @@ export default defineComponent({
         especialidade: this.form.especialidade,
         crm: this.form.crm,
         cbo: this.form.cbo,
-        email: this.form.email
+        email: this.form.email,
       };
 
       axiosInstance
@@ -540,15 +538,9 @@ export default defineComponent({
           );
         })
         .catch((err) => {
-          if (axios.isAxiosError(err)){
-
-            alertInstance(
-              "3000",
-              err.response.data.message,
-              "error"
-            );
-          }else{
-
+          if (axios.isAxiosError(err)) {
+            alertInstance("3000", err.response.data.message, "error");
+          } else {
             alertInstance(
               "3000",
               "Ocorreu um erro ao salvar o profissional.",
@@ -574,14 +566,11 @@ export default defineComponent({
     },
     async buscaEspecialidades() {
       try {
-        let response = await axiosInstance.get(
-          "/especialidade/findAll",
-          {
-            headers: {
-              Authorization: `Bearer ${useAuth.token}`,
-            },
-          }
-        );
+        let response = await axiosInstance.get("/especialidade/findAll", {
+          headers: {
+            Authorization: `Bearer ${useAuth.token}`,
+          },
+        });
         this.especialidades = response.data.especialidades;
       } catch (err) {
         alertInstance(1500, err.message, "error");

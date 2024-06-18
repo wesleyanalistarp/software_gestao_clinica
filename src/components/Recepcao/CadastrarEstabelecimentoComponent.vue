@@ -22,7 +22,7 @@
             <div class="mb-2 mt-2 col-md-4 col-2">
               <label for="nome" class="form-label">CNES</label>
               <input
-                type="number"
+                type="text"
                 class="form-control form-control-sm"
                 id="cnes"
                 v-model="form.cnes"
@@ -77,7 +77,7 @@
             <div class="mb-2 mt-2 col-md-4 col-2">
               <label for="nome" class="form-label">Número</label>
               <input
-                type="text"
+                type="number"
                 class="form-control form-control-sm"
                 id="numero"
                 v-model="form.numero"
@@ -157,7 +157,7 @@
             <div class="mb-2 mt-2 col-md-4 col-2">
               <label for="nome" class="form-label">Regional de saúde</label>
               <input
-                type="number"
+                type="text"
                 class="form-control form-control-sm"
                 id="regional"
                 v-model="form.regionalSaude"
@@ -252,9 +252,9 @@ export default defineComponent({
     submit() {
       const data = {
         nome: this.form.nome,
-        nomeEmpresarial: this.form.nomeEmpresarial,
+        nome_empresarial: this.form.nomeEmpresarial,
         cnes: this.form.cnes,
-        naturezaJuridica: this.form.naturezaJuridica,
+        natureza_juridica: this.form.naturezaJuridica,
         cnpj: this.form.cnpj,
         logradouro: this.form.logradouro,
         numero: this.form.numero,
@@ -265,11 +265,13 @@ export default defineComponent({
         cep: this.form.cep,
         telefone: this.form.telefone,
         dependencia: this.form.dependencia,
-        regionalSaude: this.form.regionalSaude,
-        tipoEstabelecimento: this.form.tipoEstabelecimento,
-        subtipoEstabelecimento: this.form.subtipoEstabelecimento,
+        regional_saude: this.form.regionalSaude,
+        tipo_estabelecimento: this.form.tipoEstabelecimento,
+        subtipo_estabelecimento: this.form.subtipoEstabelecimento,
         gestao: this.form.gestao,
       };
+
+      console.log(data.cnpj);
 
       axiosInstance
         .post("/clinica/create", data, {
@@ -278,6 +280,7 @@ export default defineComponent({
           },
         })
         .then((response) => {
+          console.log(response.data);
           alertInstance(
             4000,
             "Estabelecimento cadastrado com sucesso!",

@@ -3,42 +3,83 @@
     <div class="card p-3">
       <div class="card mb-3">
         <div class="input-group mb-3">
-          <span class="input-group-text m-2" id="inputGroup-sizing-default">Consultar agenda
-            <input type="text" class="form-control m-2" placeholder="Digite o nome do médico "
-              aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></span>
+          <span class="input-group-text m-2" id="inputGroup-sizing-default"
+            >Consultar agenda
+            <input
+              type="text"
+              class="form-control m-2"
+              placeholder="Digite o nome do médico "
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+          /></span>
 
-          <select class="form-select font-size-sm m-2" style="width: 190px;">
+          <select class="form-select font-size-sm m-2" style="width: 190px">
             <option selected>Buscar agenda por Especialidade</option>
             <option value="1">Puxar do banco</option>
           </select>
-          <button type="button" class="btn btn-outline-success btn-sm mt-2" style="height: 68px;">Buscar agenda</button>
+          <button
+            type="button"
+            class="btn btn-outline-success btn-sm mt-2"
+            style="height: 68px"
+          >
+            Buscar agenda
+          </button>
         </div>
         <div class="button">
-          <button type="submit" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-            style="height: 40px; width: 199px; margin: 10px;">
+          <button
+            type="submit"
+            class="btn btn-outline-success"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+            style="height: 40px; width: 199px; margin: 10px"
+          >
             <i class="fa-solid fa-plus"></i>
             Criar agenda médico
           </button>
-          <button type="submit" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#agendamento_paciente"
-           style="height: 40px; width: 270px; margin: 10px;">
+          <button
+            type="submit"
+            class="btn btn-outline-success"
+            data-bs-toggle="modal"
+            data-bs-target="#agendamento_paciente"
+            style="height: 40px; width: 270px; margin: 10px"
+          >
             <i class="fa-solid fa-eye"></i>
             Agendamento do paciente
           </button>
-          <button type="submit" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#lista_especialidade"
-           style="height: 40px; width: 290px; margin: 10px;">
-           <i class="fa-solid fa-magnifying-glass"></i>
+          <button
+            type="submit"
+            class="btn btn-outline-success"
+            data-bs-toggle="modal"
+            data-bs-target="#lista_especialidade"
+            style="height: 40px; width: 290px; margin: 10px"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i>
             Consultar lista por especialidade
           </button>
         </div>
       </div>
       <!--Inicio do modal para criar a agenda médica-->
-      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div
+        class="modal fade"
+        id="staticBackdrop"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Criar agenda médica</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                Criar agenda médica
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
             <div class="modal-body">
               <div class="input-group mb-3">
@@ -50,22 +91,42 @@
               </div>
               <div class="texto">
                 Selecione a data:
-                <input type="date">
+                <input type="date" />
               </div>
               <div class="time">
-                <p class="subscribe">Das <input type="time"> as <input type="time"> <a href="#">
-                  <button class="btn btn-outline-success btn-sm" type="button" id="button-addon2"><i
-                    class="fa-solid fa-plus"></i> Adicionar</button></a></p>
+                <p class="subscribe">
+                  Das <input type="time" /> as <input type="time" />
+                  <a href="#">
+                    <button
+                      class="btn btn-outline-success btn-sm"
+                      type="button"
+                      id="button-addon2"
+                    >
+                      <i class="fa-solid fa-plus"></i> Adicionar
+                    </button></a
+                  >
+                </p>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckIndeterminate"
+                />
                 <label class="form-check-label" for="flexCheckIndeterminate">
                   Atenderá todos os dias da semana horário comércial
                 </label>
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-bs-dismiss="modal">Criar agenda</button>
+              <button
+                type="button"
+                class="btn btn-success"
+                data-bs-dismiss="modal"
+              >
+                Criar agenda
+              </button>
             </div>
           </div>
         </div>
@@ -73,25 +134,54 @@
       <!--fim do modal para criar a agenda médica-->
       <!--**************************************************************************************************-->
       <!--Inicio do modal para consultar a agenda do paciente-->
-      <div class="modal fade" id="agendamento_paciente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div
+        class="modal fade"
+        id="agendamento_paciente"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Consultar agendamento do paciente</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                Consultar agendamento do paciente
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
             <div class="modal-body">
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Digite o nome do paciente"
-                  aria-label="Recipient's username" aria-describedby="button-addon2">
-                <button class="btn btn-outline-success" type="button" id="button-addon2">
-                  <i class="fa-solid fa-magnifying-glass"></i> Localizar</button>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Digite o nome do paciente"
+                  aria-label="Recipient's username"
+                  aria-describedby="button-addon2"
+                />
+                <button
+                  class="btn btn-outline-success"
+                  type="button"
+                  id="button-addon2"
+                >
+                  <i class="fa-solid fa-magnifying-glass"></i> Localizar
+                </button>
               </div>
-
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-bs-dismiss="modal">Confirmar</button>
+              <button
+                type="button"
+                class="btn btn-success"
+                data-bs-dismiss="modal"
+              >
+                Confirmar
+              </button>
             </div>
           </div>
         </div>
@@ -99,52 +189,72 @@
       <!--fim do modal para consultar a agenda do paciente-->
       <!--*******************************************************************************-->
       <!--inicio do modal para consultar a lista de frequência por especialidade-->
-      <div class="modal fade" id="lista_especialidade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div
+        class="modal fade"
+        id="lista_especialidade"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Consultar lista de paciente por especialidade</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                Consultar lista de paciente por especialidade
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
             <div class="modal-body">
-                  <select class="form-select font-size-sm m-2 col-12">
-                    <option selected>Consultar por Especialidade</option>
-                    <option value="1">Puxar do banco</option>
-                  </select>
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Paciente</th>
-                        <th scope="col">Profissional</th>
-                        <th scope="col">Horário</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Wesley</td>
-                        <td>Dr.Jefersson</td>
-                        <td>10:30</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Wesley</td>
-                        <td>Dr.Jefersson</td>
-                        <td>10:30</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Wesley</td>
-                        <td>Dr.Jefersson</td>
-                        <td>10:30</td>
-                      </tr>
-                    </tbody>
-                  </table>
+              <select class="form-select font-size-sm m-2 col-12">
+                <option selected>Consultar por Especialidade</option>
+                <option value="1">Puxar do banco</option>
+              </select>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Paciente</th>
+                    <th scope="col">Profissional</th>
+                    <th scope="col">Horário</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Wesley</td>
+                    <td>Dr.Jefersson</td>
+                    <td>10:30</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Wesley</td>
+                    <td>Dr.Jefersson</td>
+                    <td>10:30</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Wesley</td>
+                    <td>Dr.Jefersson</td>
+                    <td>10:30</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-bs-dismiss="modal">Imprimir lista</button>
+              <button
+                type="button"
+                class="btn btn-success"
+                data-bs-dismiss="modal"
+              >
+                Imprimir lista
+              </button>
             </div>
           </div>
         </div>
@@ -174,7 +284,7 @@ import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import ptBrLocale from '@fullcalendar/core/locales/pt-br';
+import ptBrLocale from "@fullcalendar/core/locales/pt-br";
 import moment from "moment";
 import Select2Component from "../Select2Component.vue";
 
@@ -182,7 +292,7 @@ export default defineComponent({
   name: "AgendaComponent",
   components: {
     FullCalendar,
-    Select2Component
+    Select2Component,
   },
   data() {
     return {
@@ -191,14 +301,14 @@ export default defineComponent({
         plugins: [
           dayGridPlugin,
           timeGridPlugin,
-          interactionPlugin // needed for dateClick
+          interactionPlugin, // needed for dateClick
         ],
         headerToolbar: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          left: "prev,next today",
+          center: "title",
+          right: "dayGridMonth,timeGridWeek,timeGridDay",
         },
-        initialView: 'dayGridMonth',
+        initialView: "dayGridMonth",
         initialEvents: [], // alternatively, use the `events` setting to fetch from a feed
         editable: true,
         selectable: true,
@@ -208,21 +318,21 @@ export default defineComponent({
         select: this.handleDateSelect,
         eventClick: this.handleEventClick,
         eventsSet: this.handleEvents,
-        eventResize: this.handleEventResize
+        eventResize: this.handleEventResize,
       },
       currentEvents: [],
       selectedOptions: [],
-    }
+    };
   },
   methods: {
     handleWeekendsToggle() {
-      this.calendarOptions.weekends = !this.calendarOptions.weekends // update a property
+      this.calendarOptions.weekends = !this.calendarOptions.weekends; // update a property
     },
     handleDateSelect(selectInfo) {
-      let title = prompt('Agendar paciente')
-      let calendarApi = selectInfo.view.calendar
+      let title = prompt("Agendar paciente");
+      let calendarApi = selectInfo.view.calendar;
 
-      calendarApi.unselect() // clear date selection
+      calendarApi.unselect(); // clear date selection
 
       if (title) {
         calendarApi.addEvent({
@@ -230,23 +340,27 @@ export default defineComponent({
           title,
           start: selectInfo.startStr,
           end: selectInfo.endStr,
-          allDay: selectInfo.allDay
-        })
+          allDay: selectInfo.allDay,
+        });
       }
     },
     handleEventClick(clickInfo) {
-      if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-        clickInfo.event.remove()
+      if (
+        confirm(
+          `Are you sure you want to delete the event '${clickInfo.event.title}'`
+        )
+      ) {
+        clickInfo.event.remove();
       }
     },
     handleEventResize(info) {
-      console.log(moment(info.event.start).format('YYYY-MM-DD HH:MM'))
-      console.log(moment(info.event.end).format('YYYY-MM-DD HH:MM'))
+      console.log(moment(info.event.start).format("YYYY-MM-DD HH:MM"));
+      console.log(moment(info.event.end).format("YYYY-MM-DD HH:MM"));
     },
     handleEvents(events) {
-      this.currentEvents = events
+      this.currentEvents = events;
     },
-  }
+  },
 });
 </script>
 
@@ -273,7 +387,7 @@ export default defineComponent({
   margin: 0 auto;
 }
 
-.time{
+.time {
   margin: 5px;
 }
 </style>

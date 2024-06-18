@@ -293,8 +293,7 @@ function loadUsers(query, setOptions) {
           };
         })
       );
-    })
-    ;
+    });
 }
 </script>
 

@@ -102,7 +102,7 @@ export default defineComponent({
         })
         .then((response) => {
           alertInstance(4000, "Consultório cadastrado com sucesso!", "success");
-          this.resetForm();
+          this.resetform();
         })
         .catch((error) => {
           console.log("deu ruim");

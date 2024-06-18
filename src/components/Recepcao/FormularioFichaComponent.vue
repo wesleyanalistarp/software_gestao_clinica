@@ -1,3 +1,22 @@
+<style>
+.list-unstyled {
+  background-color: #fff;
+  width: 582px;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 1;
+  border-radius: 8px;
+}
+
+.list-item:hover {
+  background-color: #f2f2f2;
+}
+
+.list-item {
+  cursor: pointer;
+}
+</style>
+
 <template>
   <div>
     <div class="card-body mt-2">
@@ -24,19 +43,12 @@
                 <label for="exampleInputEmail1" class="form-label"
                   >Paciente</label
                 >
-                <select
-                  v-model="selectedPaciente"
-                  class="form-select form-select-sm"
-                  aria-label="Small select example"
-                >
-                  <option
-                    v-for="paciente in pacientesOptions"
-                    :value="paciente.id"
-                    :key="paciente.id"
-                  >
-                    {{ paciente.nome }}
-                  </option>
-                </select>
+                <VueSelect
+                  v-model="formCadastrarAgenda.tbpessoa_id"
+                  :options="paciente"
+                  @change="getAgendaMedico"
+                  placeholder="Selecione um profissional"
+                />
               </div>
               <div class="card col-2" style="background: #f2f2f2; height: 80px">
                 <div class="form-check form-switch mt-4 text-center fw-bold">
@@ -71,6 +83,7 @@
                 >
                 <input
                   type="date"
+                  :max="todayDate"
                   v-model="form.nascimento"
                   class="form-control form-control-sm"
                   id="exampleInputEmail1"
@@ -161,14 +174,19 @@
                 <label for="exampleInputEmail1" class="form-label"
                   >Profissional</label
                 >
-                <input
-                  type="text"
-                  v-model="form.profissional"
-                  class="form-control form-control-sm"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                  placeholder="Digite o nome do médico"
-                />
+                <select
+                  v-model="selectedProfissional"
+                  class="form-select form-select-sm"
+                  aria-label="Small select example"
+                >
+                  <option
+                    v-for="profissional in profissionalOption"
+                    :value="profissional.id"
+                    :key="profissional.id"
+                  >
+                    {{ profissional.nome }}
+                  </option>
+                </select>
               </div>
               <div class="mb-3 mt-2 col-2">
                 <label for="exampleInputEmail1" class="form-label"
@@ -191,12 +209,18 @@
               <div class="mb-3 mt-2 col-2">
                 <label for="exampleInputEmail1" class="form-label">Sala</label>
                 <select
-                  v-model="form.sala"
+                  v-model="selectedSala"
                   class="form-select form-select-sm"
                   aria-label="Small select example"
+                  :disabled="!salaOptions.length"
                 >
-                  <option selected>Selecione</option>
-                  <option value="1">Buscar do banco</option>
+                  <option
+                    v-for="sala in salaOptions"
+                    :value="sala.sala"
+                    :key="sala.id"
+                  >
+                    {{ sala.sala }}
+                  </option>
                 </select>
               </div>
               <div class="mb-2 mt-2 col-3">
@@ -258,7 +282,7 @@
                     class="form-check-input"
                     v-model="form.gestante"
                     type="radio"
-                    value="1"
+                    :value="true"
                     name="flexRadioDefault"
                     id="flexRadioDefault1"
                   />
@@ -271,7 +295,7 @@
                     class="form-check-input"
                     type="radio"
                     v-model="form.gestante"
-                    value="0"
+                    :value="false"
                     name="flexRadioDefault"
                     id="flexRadioDefault2"
                     checked
@@ -281,10 +305,10 @@
                   </label>
                 </div>
                 <label for="exampleInputEmail1" class="form-label"
-                  >Quantos mêses?</label
+                  >Quantos meses?</label
                 >
                 <input
-                  type="text"
+                  type="number"
                   v-model="form.gestanteMeses"
                   class="form-control form-control-sm"
                   id="exampleInputEmail1"
@@ -315,25 +339,23 @@
                 >Tipo do atendimento</label
               >
               <select
+                type="number"
                 class="form-select form-select-sm"
                 aria-label="Small select example"
                 v-model="form.tipoAtendimento"
               >
                 <option selected>Selecione</option>
-                <option value="particular">Particular</option>
-                <option value="convenio">Convênio</option>
+                <option value="0">Particular</option>
+                <option value="1">Convênio</option>
               </select>
             </div>
-            <div
-              class="row"
-              v-if="form.tipoAtendimento === 'convenio'"
-              id="convenio"
-            >
+            <div class="row" v-if="form.tipoAtendimento === '1'" id="convenio">
               <div class="mb-3 mt-2 col-2">
                 <label for="exampleInputEmail1" class="form-label"
                   >Tipo do Convênio</label
                 >
                 <select
+                  type="number"
                   class="form-select form-select-sm"
                   aria-label="Small select example"
                   v-model="form.tipoConvenio"
@@ -349,7 +371,7 @@
                   >Matrícula</label
                 >
                 <input
-                  type="text"
+                  type="number"
                   v-model="form.matricula"
                   class="form-control form-control-sm"
                   id="exampleInputEmail1"
@@ -366,8 +388,13 @@
                   aria-label="Small select example"
                   v-model="selectedProcedimento"
                 >
-                  <option selected>Selecione</option>
-                  <option value="1">Puxar do banco</option>
+                  <option
+                    v-for="procedimento in procedimentoOptions"
+                    :value="procedimento.id"
+                    :key="procedimento.id"
+                  >
+                    {{ procedimento.nome }}
+                  </option>
                 </select>
               </div>
               <div class="mb-3 mt-2 col-2">
@@ -386,7 +413,7 @@
                   >Registro</label
                 >
                 <input
-                  type="text"
+                  type="number"
                   v-model="form.registro"
                   class="form-control form-control-sm"
                   id="exampleInputEmail1"
@@ -397,7 +424,7 @@
               <div class="mb-3 mt-2 col-2">
                 <label for="exampleInputEmail1" class="form-label">Valor</label>
                 <input
-                  type="text"
+                  type="number"
                   v-model="form.valor"
                   class="form-control form-control-sm"
                   id="exampleInputEmail1"
@@ -410,7 +437,7 @@
 
             <div
               class="row"
-              v-if="form.tipoAtendimento === 'particular'"
+              v-if="form.tipoAtendimento === '0'"
               id="particular"
             >
               <div class="mb-3 mt-2 col-2">
@@ -432,9 +459,15 @@
                 <select
                   class="form-select form-select-sm"
                   aria-label="Small select example"
+                  v-model="selectedProcedimento"
                 >
-                  <option selected>Selecione</option>
-                  <option value="1">Puxar do banco</option>
+                  <option
+                    v-for="procedimento in procedimentoOptions"
+                    :value="procedimento.id"
+                    :key="procedimento.id"
+                  >
+                    {{ procedimento.nome }}
+                  </option>
                 </select>
               </div>
               <div class="mb-2 mt-2 col-2">
@@ -486,16 +519,23 @@
   </div>
 </template>
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, watch, ref } from "vue";
 import axiosInstance from "../../config/axios";
 import { useAuthStore } from "../../stores/AuthStore";
+import VueSelect from "vue3-select-component";
+
 const useAuth = useAuthStore();
 
 export default defineComponent({
   name: "CadastrarFichaPaciente",
   data() {
     return {
+      todayDate: new Date().toISOString().substr(0, 10),
+
+      searchQuery: "",
+
       form: {
+        tbpaciente_id: "",
         nome: "",
         retorno: false,
         sexo: "",
@@ -511,7 +551,7 @@ export default defineComponent({
         medicacaoContinua: "",
         mae: "",
         acompanhante: "",
-        gestante: "0",
+        gestante: false,
         gestanteMeses: "",
         observacao: "",
         tipoAtendimento: "",
@@ -529,6 +569,9 @@ export default defineComponent({
       pacientesOptions: [], // Array para armazenar as opções do select
       selectedPaciente: null,
 
+      profissionalOption: [],
+      selectedProfissional: null,
+
       comorbidadesOptions: [], // Array para armazenar as opções do select
       selectedComorbidade: null,
 
@@ -537,6 +580,9 @@ export default defineComponent({
 
       consultorioOptions: [], // Array para armazenar as opções do select
       selectedConsultorio: null,
+
+      salaOptions: [], // Array para armazenar as opções do select
+      selectedSala: null,
 
       especialidadeOptions: [], // Array para armazenar as opções do select
       selectedEspecialidade: null,
@@ -552,6 +598,7 @@ export default defineComponent({
     this.getConsultorios();
     this.getEspecialidades();
     this.getProcedimentos();
+    this.getProfissionais();
   },
   methods: {
     getPacientes() {
@@ -569,6 +616,30 @@ export default defineComponent({
             };
           });
           this.pacientesOptions = pacientes;
+        })
+        .catch((error) => {
+          console.log("deu ruim");
+          console.log(error);
+        });
+    },
+
+    getProfissionais() {
+      axiosInstance
+        .get("/profissional/findAll", {
+          headers: {
+            Authorization: `Bearer ${useAuth.token}`,
+          },
+        })
+        .then((response) => {
+          const profissionais = response.data.profissionais.map(
+            (profissional) => {
+              return {
+                id: profissional.id, // Assuma que "id" é a propriedade que identifica a comorbidade
+                nome: profissional.pessoa.nome, // Assuma que "descricao" é a propriedade do nome da comorbidade
+              };
+            }
+          );
+          this.profissionalOption = profissionais;
         })
         .catch((error) => {
           console.log("deu ruim");
@@ -642,6 +713,7 @@ export default defineComponent({
             };
           });
           this.consultorioOptions = consultorios;
+          this.salaOptions = consultorios;
         })
         .catch((error) => {
           console.log("deu ruim");
@@ -700,55 +772,68 @@ export default defineComponent({
 
     submit() {
       const data = {
-        nome: this.form.nome,
+        tbpaciente_id: this.selectedPaciente,
         retorno: this.form.retorno,
         sexo: this.form.sexo,
         nascimento: this.form.nascimento,
         tipo: this.form.tipo,
-        tbexame_id: this.selectedExame,
-        tbcomorbidade_id: this.selectedComorbidade,
+        exame_id: this.selectedExame,
+        comorbidade_id: this.selectedComorbidade,
         prioridade: this.form.prioridade,
-        tbespecialidade_id: this.selectedEspecialidade,
-        tbprofissional_id: this.form.profissional,
-        tbconsultorio_id: this.selectedConsultorio,
+        especialidade_id: this.selectedEspecialidade,
+        profissional_id: this.selectedProfissional,
+        consultorio_id: this.selectedConsultorio,
         alergia: this.form.alergia,
         medicamento_continuo: this.form.medicacaoContinua,
         mae: this.form.mae,
-        acompanhante: this.form.acompanhante,
+        acompanhamento: this.form.acompanhante,
         gestante: this.form.gestante,
         gestante_meses: this.form.gestanteMeses,
         observacao: this.form.observacao,
         tipo_pagamento: this.form.tipoAtendimento,
         tipo_convenio: this.form.tipoConvenio,
         matricula: this.form.matricula,
-        tbprocedimento_id: this.selectedProcedimento,
+        procedimento_id: this.selectedProcedimento,
         numero: this.form.numero,
         registro: this.form.registro,
         valor: this.form.valor,
       };
 
-      // axiosInstance
-      //   .post("/ficha/create", data, {
-      //     headers: {
-      //       Authorization: `Bearer ${useAuth.token}`,
-      //     },
-      //   })
-      //   .then((response) => {
-      //     alertInstance(4000, "Ficha cadastrada com sucesso!", "success");
-      //     this.resetForm();
-      //   })
-      //   .catch((error) => {
-      //     console.log("deu ruim");
-      //     console.log(error);
-      //   });
+      axiosInstance
+        .post("/ficha/create", data, {
+          headers: {
+            Authorization: `Bearer ${useAuth.token}`,
+          },
+        })
+        .then((response) => {
+          alertInstance(4000, "Ficha cadastrada com sucesso!", "success");
+          this.resetForm();
+        })
+        .catch((error) => {
+          console.log("deu ruim");
+          console.log(error);
+          this.resetForm();
+        });
     },
 
-    resetform() {
+    resetForm() {
       for (let key in this.form) {
         if (this.form.hasOwnProperty(key)) {
           this.form[key] = "";
         }
       }
+    },
+  },
+
+  watch: {
+    searchQuery(value) {
+      console.log(value);
+    },
+  },
+
+  computed: {
+    filteredList() {
+      console.log(this.searchQuery);
     },
   },
 });
