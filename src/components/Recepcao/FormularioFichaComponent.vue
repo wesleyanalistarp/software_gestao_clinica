@@ -43,12 +43,13 @@
                 <label for="exampleInputEmail1" class="form-label"
                   >Paciente</label
                 >
-                <VueSelect
-                  v-model="formCadastrarAgenda.tbpessoa_id"
-                  :options="paciente"
-                  @change="getAgendaMedico"
+                <!-- <VueSelect
+                  v-model="selectedPaciente"
+                  :options="pacientesOptions"
                   placeholder="Selecione um profissional"
-                />
+                /> -->
+
+                <input type="text" />
               </div>
               <div class="card col-2" style="background: #f2f2f2; height: 80px">
                 <div class="form-check form-switch mt-4 text-center fw-bold">
@@ -591,6 +592,9 @@ export default defineComponent({
       selectedProcedimento: null,
     };
   },
+  components: {
+    VueSelect,
+  },
   mounted() {
     this.getPacientes();
     this.getComorbidades();
@@ -611,8 +615,8 @@ export default defineComponent({
         .then((response) => {
           const pacientes = response.data.pacientes.map((paciente) => {
             return {
-              id: paciente.id, // Assuma que "id" é a propriedade que identifica a comorbidade
-              nome: paciente.nome, // Assuma que "descricao" é a propriedade do nome da comorbidade
+              value: paciente.id, // Assuma que "id" é a propriedade que identifica a comorbidade
+              label: paciente.nome, // Assuma que "descricao" é a propriedade do nome da comorbidade
             };
           });
           this.pacientesOptions = pacientes;
